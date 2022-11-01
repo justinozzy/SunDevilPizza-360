@@ -37,6 +37,7 @@ public class SceneController {
 	 }
 	 
 	 public void switchToStudentLogInScreen(ActionEvent event) throws IOException {
+		 //This is a test
 		 root = FXMLLoader.load(getClass().getResource("StudentLogInScreen.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);

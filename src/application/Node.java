@@ -23,6 +23,10 @@ public class Node {
     public int getId() {
         return id;
     }
+    
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     public Status getStatus() {
         return status;

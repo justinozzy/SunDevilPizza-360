@@ -12,7 +12,7 @@ public class PizzaLists {
     private LinkedList<Node> rejectedList = new LinkedList<Node>();
     private LinkedList<Node> tempList = new LinkedList<Node>();
 
-    // list getter, parameter should be string of name of the list to get.
+    // list getter, parameter listName : String, it should be the name of the list to get.
     public LinkedList<Node> getList(String listName){
         switch(listName){
             case "newList":
@@ -30,6 +30,7 @@ public class PizzaLists {
             case "tempList":
                 return tempList;
             default:
+                //If given an unknown listName return tempList as default
                 System.out.println("[Error] Unexpected string in PizzaList.getList(string), tempList returned as default");
                 return tempList;
         }

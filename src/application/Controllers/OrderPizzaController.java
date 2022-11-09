@@ -138,6 +138,10 @@ public class OrderPizzaController extends SceneController {
 
         // WIP, might not need tempList? Maybe just add straight to newList?
         PizzaLists.getList("tempList").add(newOrder);
+
+        /*WIP, SwitchToMainMenu should be called either here, or when the button is clicked.
+          but i'm not sure if the fxml can call 2 action handlers.
+         */
     }
 
 }

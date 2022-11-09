@@ -38,7 +38,6 @@ public class SceneController {
 	 
 	 public void switchToStudentLogInScreen(ActionEvent event) throws IOException {
 		 root = FXMLLoader.load(getClass().getResource("../Panes/StudentLogInScreen.fxml"));
-		 System.out.println("root="+root);
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
 		 stage.setScene(scene);

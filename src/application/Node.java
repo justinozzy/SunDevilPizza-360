@@ -6,11 +6,14 @@ public class Node {
     private int id = -1;
     private Status status = null;
     private String base = "";
-    private String toppings = "";
+
+    //NOTE: Index for each toppings are static!!
+    // [0] = chicken, [1] = jalapenos, [2] = Onions
+    private String[] toppings = {"","",""};
     private String bake = "";
 
     //Node Constructor, data shouldn't be modified -> no setters
-    public Node(String name, int id, Status status, String base, String toppings, String bake){
+    public Node(String name, int id, Status status, String base, String[] toppings, String bake){
         this.name = name;
         this.id = id;
         this.status = status;
@@ -44,7 +47,7 @@ public class Node {
         return name;
     }
 
-    public String getToppings() {
+    public String[] getToppings() {
         return toppings;
     }
 

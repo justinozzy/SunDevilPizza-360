@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,39 +14,75 @@ public class PizzaDatabase {
     static final String db_employees = "jdbc:sqlite:db/employees.db";
 
     //Used to connect to the Pizza Database and gather the requested information
-    public static void connect(String database) {
+    public static String[] getStudent(Integer id) {
         //Declare variables
         Connection conn = null;
         Statement statement;
+        String[] data = new String[3];
 
+        //Connect to students database
         try {
-            //Connect to students database
-            if (Objects.equals(database, "students")) {
-                //Create the database connection
-                conn = DriverManager.getConnection(db_students);
-                statement = conn.createStatement();
-                statement.setQueryTimeout(15);
-                System.out.println("Student pizza database connected!\n");
+            //Create the database connection
+            conn = DriverManager.getConnection(db_students);
+            statement = conn.createStatement();
+            statement.setQueryTimeout(15);
+            System.out.println("Student pizza database connected!\n");
 
-                //Do some SQL statement...
-                ResultSet rs = statement.executeQuery("SQL STATEMENT");
-                while (rs.next()) {
-                    //Will create later
+            //Select query for getting the user with specified ID
+            ResultSet rs = statement.executeQuery(String.format("SELECT * FROM users WHERE id=%d", id));
+
+            //Set user information
+            data[0] = String.valueOf(rs.getInt("id"));
+            data[1] = rs.getString("name");
+            data[2] = String.valueOf(rs.getInt("balance"));
+        }
+        //Most likely database isn't found so throw an error
+        catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            //Close the database connection
+            try {
+                if (conn != null) {
+                    conn.close();
                 }
             }
-            //Connect to employees database
-            else if (Objects.equals(database, "employees")) {
-                //Create the database connection
-                conn = DriverManager.getConnection(db_employees);
-                statement = conn.createStatement();
-                statement.setQueryTimeout(15);
-                System.out.println("Employee pizza database connected!\n");
+            //Failure to close connection
+            catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        }
 
-                //Do some SQL statement...
-                ResultSet rs = statement.executeQuery("SQL STATEMENT");
-                while (rs.next()) {
-                    //Will create later
-                }
+        System.out.println("Requested user: " + Arrays.toString(data));
+
+        //Return data array with requested info; NULL if failed
+        return data;
+    }
+
+    //Used to connect to the Pizza Database and gather the requested information
+    public static boolean getEmployee(String username, String password) {
+        //Declare variables
+        Connection conn = null;
+        Statement statement;
+        String pass;
+        boolean bool = false;
+
+        //Connect to employee database
+        try {
+            //Create the database connection
+            conn = DriverManager.getConnection(db_employees);
+            statement = conn.createStatement();
+            statement.setQueryTimeout(15);
+            System.out.println("Employee pizza database connected!\n");
+
+            //Select query for getting the employee with specified username
+            ResultSet rs = statement.executeQuery(String.format("SELECT password FROM employees WHERE username='%s'", username));
+
+            //Set employee information
+            pass = rs.getString("password");
+
+            //Check if the passwords are equal
+            if (Objects.equals(password, pass)) {
+                bool = true;
             }
         }
         //Most likely database isn't found so throw an error
@@ -63,6 +100,11 @@ public class PizzaDatabase {
                 System.err.println(e.getMessage());
             }
         }
+
+        System.out.println("Password match: " + bool);
+
+        //Return password check boolean
+        return bool;
     }
 
     //Used to create the databases
@@ -103,6 +145,7 @@ public class PizzaDatabase {
             conn = DriverManager.getConnection(db_employees);
             statement = conn.createStatement();
             statement.setQueryTimeout(15);
+            System.out.println("Employee pizza database connected!\n");
 
             //Drop the current table and create a new one with data (Used to refresh information, can be removed)
             statement.executeUpdate("DROP TABLE IF EXISTS employees");

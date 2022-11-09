@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import static application.PizzaDatabase.*;
+
 public class Main extends Application {
  
  @Override
@@ -25,6 +27,8 @@ public class Main extends Application {
  } 
 
  public static void main(String[] args) {
+  //Create the databases whenever the program is launched; Can comment after first run/databases exist
+  createDatabases();
   launch(args);
  }
 }

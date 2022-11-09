@@ -26,7 +26,7 @@ public class PizzaDatabase {
             conn = DriverManager.getConnection(db_students);
             statement = conn.createStatement();
             statement.setQueryTimeout(15);
-            System.out.println("Student pizza database connected!\n");
+            System.out.println("Student pizza database connected!");
 
             //Select query for getting the user with specified ID
             ResultSet rs = statement.executeQuery(String.format("SELECT * FROM users WHERE id=%d", id));
@@ -52,19 +52,23 @@ public class PizzaDatabase {
             }
         }
 
-        System.out.println("Requested user: " + Arrays.toString(data));
+        //Debug
+        System.out.println("Requested user: " + Arrays.toString(data) + "\n");
 
         //Return data array with requested info; NULL if failed
         return data;
     }
 
-    //Used to connect to the Pizza Database and gather the requested information
-    public static boolean getEmployee(String username, String password) {
+    /**Used to connect to the Pizza Database and gather the requested information
+     * returnValue meaning: 0 = Password mismatch, 1 = Chef worker, 2 = Agent worker
+     */
+    public static int getEmployee(String username, String password) {
         //Declare variables
         Connection conn = null;
         Statement statement;
         String pass;
-        boolean bool = false;
+        String worker;
+        int returnValue = 0;
 
         //Connect to employee database
         try {
@@ -72,17 +76,23 @@ public class PizzaDatabase {
             conn = DriverManager.getConnection(db_employees);
             statement = conn.createStatement();
             statement.setQueryTimeout(15);
-            System.out.println("Employee pizza database connected!\n");
+            System.out.println("Employee pizza database connected!");
 
             //Select query for getting the employee with specified username
-            ResultSet rs = statement.executeQuery(String.format("SELECT password FROM employees WHERE username='%s'", username));
+            ResultSet rs = statement.executeQuery(String.format("SELECT password, worker FROM employees WHERE username='%s'", username));
 
             //Set employee information
             pass = rs.getString("password");
+            worker = rs.getString("worker");
 
             //Check if the passwords are equal
             if (Objects.equals(password, pass)) {
-                bool = true;
+                if (Objects.equals(worker, "Chef")) {
+                    returnValue = 1;
+                }
+                else if (Objects.equals(worker, "Agent")) {
+                    returnValue = 2;
+                }
             }
         }
         //Most likely database isn't found so throw an error
@@ -101,10 +111,11 @@ public class PizzaDatabase {
             }
         }
 
-        System.out.println("Password match: " + bool);
+        //Debug
+        System.out.println("Return Value: " + returnValue + "\n");
 
         //Return password check boolean
-        return bool;
+        return returnValue;
     }
 
     //Used to create the databases

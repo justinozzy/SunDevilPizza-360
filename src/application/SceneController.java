@@ -29,7 +29,7 @@ public class SceneController {
 	 private Label ValidWorkerPassword;
 	 
 	 public void switchToMainMenu(ActionEvent event) throws IOException {
-		 root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+		 root = FXMLLoader.load(getClass().getResource("Panes/MainMenu.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
 		 stage.setScene(scene);
@@ -37,7 +37,7 @@ public class SceneController {
 	 }
 	 
 	 public void switchToStudentLogInScreen(ActionEvent event) throws IOException {
-		 root = FXMLLoader.load(getClass().getResource("StudentLogInScreen.fxml"));
+		 root = FXMLLoader.load(getClass().getResource("Panes/StudentLogInScreen.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
 		 stage.setScene(scene);
@@ -45,35 +45,35 @@ public class SceneController {
 	 }
 	 
 	 public void switchToWorkerLogInScreen(ActionEvent event) throws IOException {
-		 root = FXMLLoader.load(getClass().getResource("WorkerLogInScreen.fxml"));
+		 root = FXMLLoader.load(getClass().getResource("Panes/WorkerLogInScreen.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
 		 stage.setScene(scene);
 		 stage.show();
 	 }
 	 public void switchToStudentMenu(ActionEvent event) throws IOException {
-		 root = FXMLLoader.load(getClass().getResource("StudentMenu.fxml"));
+		 root = FXMLLoader.load(getClass().getResource("Panes/StudentMenu.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
 		 stage.setScene(scene);
 		 stage.show();
 	 }
 	 public void switchToOrderPizza(ActionEvent event) throws IOException {
-		 root = FXMLLoader.load(getClass().getResource("OrderPizza.fxml"));
+		 root = FXMLLoader.load(getClass().getResource("Panes/OrderPizza.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
 		 stage.setScene(scene);
 		 stage.show();
 	 }
 	 public void switchToReviewOrder(ActionEvent event) throws IOException {
-		 root = FXMLLoader.load(getClass().getResource("ReviewOrder.fxml"));
+		 root = FXMLLoader.load(getClass().getResource("Panes/ReviewOrder.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
 		 stage.setScene(scene);
 		 stage.show();
 	 }
 	 public void switchToCheckOrders(ActionEvent event) throws IOException {
-		 root = FXMLLoader.load(getClass().getResource("CheckOrders.fxml"));
+		 root = FXMLLoader.load(getClass().getResource("Panes/CheckOrders.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
 		 stage.setScene(scene);
@@ -81,13 +81,13 @@ public class SceneController {
 	 }
 	 public void switchToWorkerScreen(ActionEvent event) throws IOException {
 		 if (WorkerID.getText().toString().equals("agent")) {
-			 root = FXMLLoader.load(getClass().getResource("AgentScreen.fxml"));
+			 root = FXMLLoader.load(getClass().getResource("Panes/AgentScreen.fxml"));
 			 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			 scene = new Scene(root);
 			 stage.setScene(scene);
 			 stage.show();
 		 } else if (WorkerID.getText().toString().equals("chef")) {
-			 root = FXMLLoader.load(getClass().getResource("ChefScreen.fxml"));
+			 root = FXMLLoader.load(getClass().getResource("Panes/ChefScreen.fxml"));
 			 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			 scene = new Scene(root);
 			 stage.setScene(scene);

@@ -1,6 +1,6 @@
 package application;
 
-public class Node {
+public class NodeData {
     //Initialize variables, default empty
     private String name = "";
     private int id = -1;
@@ -13,7 +13,11 @@ public class Node {
     private String bake = "";
 
     //Node Constructor, data shouldn't be modified -> no setters
-    public Node(String name, int id, Status status, String base, String[] toppings, String bake){
+
+    public NodeData(){
+    }
+
+    public void updateNode(String name, int id, Status status, String base, String[] toppings, String bake){
         this.name = name;
         this.id = id;
         this.status = status;

@@ -1,89 +1,26 @@
 package application.Controllers;
-import application.Node;
+import application.NodeData;
 import application.PizzaLists;
 import application.Status;
-import javafx.event.ActionEvent;
-
-import javax.swing.*;
-import java.util.ArrayList;
 
 public class OrderPizzaController extends SceneController {
-    String name = "";
-    int id;
-    String base = "";
-
-    // [0] = chicken, [1] = jalapenos, [2] = onions
-    String[] toppings = {"","",""};
-    String bake = "";
-
-    /* Setters methods to call for each individual Radio buttons, automatically re-set upon selecting a different base,
-       remove function not needed. */
-    public void setBaseCheese(){
-        base = "Cheese";
-    }
-
-    public void setBaseVeggie(){
-        base = "Veggie";
-    }
-
-    public void setBaseMeatLovers(){
-        base = "Meat Lover's";
-    }
-
-    public void setBakeHandTossed(){
-        bake = "Hand Tossed";
-    }
-
-    public void setBakeThinCrust(){
-        bake = "Thin Crust";
-    }
-
-    public void setBakePan(){
-        bake = "Pan";
-    }
-
-    //CheckBoxes, different functions for Selected and Unselected Action events.
-    public void addToppingsChicken(){
-        toppings[0] = "Chicken";
-    }
-
-    public void removeToppingsChicken(){
-        toppings[0] = "";
-    }
-
-    public void addToppingsJalapenos(){
-        toppings[1] = "Jalapenos";
-    }
-
-    public void removeToppingsJalapenos(){
-        toppings[1] = "";
-    }
-
-    public void addToppingsOnions(){
-        toppings[2] = "Onions";
-    }
-
-    public void removeToppingsOnions(){
-        toppings[2] = "";
-    }
-
-
-    public double calculateTotal(){
+    /*
+    public int calculateTotal(){
         //Front End WIP, total should be displayed on GUI
 
         //Order Confirmed in OrderPizzaPane, only calculate total and don't create Node until ReviewedOrderPane.
         //Calculate total based on current selections.
-        double total = 0;
+        int total = 0;
 
         switch(base){
             case "Cheese":
-                total += 10.0;
+                total += 10;
                 break;
             case "Veggie":
-                total += 12.0;
+                total += 12;
                 break;
             case "Meat Lover's":
-                total += 15.0;
+                total += 15;
                 break;
             default:
                 //base = ""; Shouldn't be reached, since a base must be selected.
@@ -93,13 +30,13 @@ public class OrderPizzaController extends SceneController {
 
         switch(bake){
             case "Hand Tossed":
-                total += 1.0;
+                total += 0;
                 break;
             case "Thin Crust":
-                total += 1.5;
+                total += 1;
                 break;
             case "Pan":
-                total += 2.0;
+                total += 2;
                 break;
             default:
                 //bake = ""; Shouldn't be reached, since a bake must be selected.
@@ -117,30 +54,34 @@ public class OrderPizzaController extends SceneController {
             }
             else if(i == 1){
                 //add jalapeno price to total
-                total += 1.5;
+                total += 1;
             }
             else if(i == 2){
                 //add onion price to total
-                total += 1.5;
+                total += 1;
             }
 
         }
 
         return total;
     }
+    */
+    public static void createNewOrder(NodeData order){
 
-    public void createNewOrder(ActionEvent event){
         //Order Confirmed in ReviewOrderPane, create new Node and insert into Linked List
         // status always = NEW at this point
+        String[] toppings = new String[3];
         Status status = Status.NEW;
+        toppings[0] = "Chickent";
+        order.updateNode("Justin Jin", 1,Status.NEW,"Cheese",toppings,"Thin Crust");
 
-        Node newOrder = new Node(name, id, status, base, toppings, bake);
 
-        // WIP, might not need tempList? Maybe just add straight to newList?
-        PizzaLists.getList("tempList").add(newOrder);
+        PizzaLists.getList("newList").add(order);
+        System.out.println(("Order added to NewList"));
 
         /*WIP, SwitchToMainMenu should be called either here, or when the button is clicked.
           but i'm not sure if the fxml can call 2 action handlers.
+
          */
     }
 

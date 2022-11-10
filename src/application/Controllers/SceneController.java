@@ -2,6 +2,7 @@ package application.Controllers;
 
 import java.io.IOException;
 
+import application.PizzaLists;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,9 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-
+import application.NodeData;
+import application.Controllers.OrderPizzaController;
 public class SceneController {
-
+	 NodeData temp = new NodeData();
 	 private Stage stage;
 	 private Scene scene;
 	 private Parent root;
@@ -29,6 +31,8 @@ public class SceneController {
 	 private Label ValidWorkerPassword;
 	 
 	 public void switchToMainMenu(ActionEvent event) throws IOException {
+		 OrderPizzaController.createNewOrder(temp);
+		 System.out.println("NewList =" + PizzaLists.getList("newList").peekFirst().getName());
 		 root = FXMLLoader.load(getClass().getResource("../Panes/MainMenu.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
@@ -66,6 +70,7 @@ public class SceneController {
 		 stage.show();
 	 }
 	 public void switchToReviewOrder(ActionEvent event) throws IOException {
+
 		 root = FXMLLoader.load(getClass().getResource("../Panes/ReviewOrder.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);

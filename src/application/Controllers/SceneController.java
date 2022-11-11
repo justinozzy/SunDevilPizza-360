@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import application.NodeData;
-import application.Controllers.OrderPizzaController;
+
 public class SceneController {
 	 NodeData temp = new NodeData();
 	 private Stage stage;
@@ -31,8 +31,6 @@ public class SceneController {
 	 private Label ValidWorkerPassword;
 	 
 	 public void switchToMainMenu(ActionEvent event) throws IOException {
-		 OrderPizzaController.createNewOrder(temp);
-		 System.out.println("NewList =" + PizzaLists.getList("newList").peekFirst().getName());
 		 root = FXMLLoader.load(getClass().getResource("../Panes/MainMenu.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);

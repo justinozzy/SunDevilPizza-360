@@ -39,7 +39,7 @@
       <TextField layoutX="122.0" layoutY="272.0" prefHeight="26.0" prefWidth="418.0" />
       <TextField layoutX="123.0" layoutY="310.0" prefHeight="26.0" prefWidth="418.0" />
       <Button layoutX="164.0" layoutY="352.0" mnemonicParsing="false" onAction="#switchToOrderPizza" text="Change Order" />
-      <Button layoutX="354.0" layoutY="352.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Confirm Order" />
+      <Button fx:id="ConfirmButton" layoutX="354.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleConfirmation" text="Confirm Order" />
       <Line endX="362.4000244140625" endY="-1.52587890625E-5" layoutX="163.0" layoutY="238.0" startX="-100.0" />
    </children>
 </AnchorPane>

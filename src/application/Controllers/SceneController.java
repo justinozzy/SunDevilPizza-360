@@ -1,7 +1,9 @@
 package application.Controllers;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 
+import application.PizzaDatabase;
 import application.PizzaLists;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +25,8 @@ public class SceneController {
 	 
 	 @FXML
 	 private TextField WorkerID;
+	 @FXML
+	 private TextField WorkerPassword;
 	 @FXML
 	 private Button WorkerLogInButton;
 	 @FXML
@@ -83,19 +87,33 @@ public class SceneController {
 		 stage.show();
 	 }
 	 public void switchToWorkerScreen(ActionEvent event) throws IOException {
-		 if (WorkerID.getText().toString().equals("agent")) {
-			 root = FXMLLoader.load(getClass().getResource("../Panes/AgentScreen.fxml"));
-			 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			 scene = new Scene(root);
-			 stage.setScene(scene);
-			 stage.show();
-		 } else if (WorkerID.getText().toString().equals("chef")) {
-			 root = FXMLLoader.load(getClass().getResource("../Panes/ChefScreen.fxml"));
-			 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			 scene = new Scene(root);
-			 stage.setScene(scene);
-			 stage.show();
-		 } else {ValidWorkerID.setText("Invalid ID");}
+		 //Verify the login information
+		 try {
+			 //Check if a worker is an Agent
+			 if (PizzaDatabase.getEmployee(WorkerID.getText(), WorkerPassword.getText()) == 1) {
+				 root = FXMLLoader.load(getClass().getResource("../Panes/AgentScreen.fxml"));
+				 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				 scene = new Scene(root);
+				 stage.setScene(scene);
+				 stage.show();
+			 }
+			 //Check if a worker is a chef
+			 else if (PizzaDatabase.getEmployee(WorkerID.getText(), WorkerPassword.getText()) == 2) {
+				 root = FXMLLoader.load(getClass().getResource("../Panes/ChefScreen.fxml"));
+				 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				 scene = new Scene(root);
+				 stage.setScene(scene);
+				 stage.show();
+			 }
+			 //Credentials are invalid
+			 else {
+				 ValidWorkerID.setText("Invalid ID");
+			 }
+		 }
+		 //Empty text fields
+		 catch (NullPointerException e) {
+			 System.err.println(e.getMessage());
+		 }
 		 
 	 }
 }

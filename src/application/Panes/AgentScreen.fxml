@@ -22,13 +22,13 @@
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Label>
-      <CheckBox layoutX="37.0" layoutY="95.0" mnemonicParsing="false" wrapText="true">
+      <CheckBox fx:id="boxNew" onAction="#addIDListNew" layoutX="37.0" layoutY="95.0" mnemonicParsing="false" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
       </CheckBox>
-      <Label layoutX="67.0" layoutY="97.0" text="Name: John Smith" />
-      <Label layoutX="67.0" layoutY="117.0" text="ID#: 1214206969" />
+      <Label layoutX="67.0" layoutY="97.0" text="Name: Justin Jin" />
+      <Label fx:id="idNew" layoutX="67.0" layoutY="117.0" text="ID#: 500" />
       <Label layoutX="67.0" layoutY="135.0" text="Order: Cheese Pizza, Chicken, Thin Crust" />
       <CheckBox layoutX="36.0" layoutY="153.0" mnemonicParsing="false" wrapText="true">
          <font>
@@ -54,17 +54,19 @@
       <Label layoutX="68.0" layoutY="271.0" text="Name: John Smith" />
       <Label layoutX="68.0" layoutY="291.0" text="ID#: 1214206969" />
       <Label layoutX="68.0" layoutY="309.0" text="Order: Cheese Pizza, Chicken, Thin Crust" />
-      <Button layoutX="67.0" layoutY="348.0" mnemonicParsing="false" text="Confirm" />
-      <Button layoutX="230.0" layoutY="348.0" mnemonicParsing="false" text="Reject" />
-      <Button layoutX="385.0" layoutY="348.0" mnemonicParsing="false" text="Confirm Picked-Up" />
+      <Button layoutX="67.0" layoutY="348.0" onAction="#newToReadyList" mnemonicParsing="false" text="Confirm" />
+      <Button layoutX="230.0" layoutY="348.0" onAction="#newToRejectedList" mnemonicParsing="false" text="Reject" />
+      <Button layoutX="385.0" layoutY="348.0" onAction="#finishedListPickedUp" mnemonicParsing="false" text="Confirm Picked-Up" />
       <Button layoutX="540.0" layoutY="1.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Log Out" />
-      <CheckBox layoutX="327.0" layoutY="97.0" mnemonicParsing="false" wrapText="true">
+
+
+      <CheckBox fx:id="boxFinished" onAction="#addIDListFinished" layoutX="327.0" layoutY="97.0" mnemonicParsing="false" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
       </CheckBox>
-      <Label layoutX="357.0" layoutY="99.0" text="Name: John Smith" />
-      <Label layoutX="357.0" layoutY="119.0" text="ID#: 1214206969" />
+      <Label layoutX="357.0" layoutY="99.0" text="Name: Justin Jin" />
+      <Label fx:id="idFinished" layoutX="357.0" layoutY="119.0" text="ID#: 500" />
       <Label layoutX="357.0" layoutY="137.0" prefWidth="212.0" text="Order: Cheese Pizza, Chicken, Thin Crust" />
    </children>
 </AnchorPane>

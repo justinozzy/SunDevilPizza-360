@@ -32,12 +32,9 @@ public class AgentScreenController extends SceneController {
             idArr = idNew.getText().split("\\s+");
             userId = Integer.parseInt(idArr[1]);
             idListNew.add(userId);
-            System.out.println("IDList=" + idListNew.toString());
-            System.out.println("ID = " + userId);
         }
         else{
             idListNew.remove(userId);
-            System.out.println("IDList=" + idListNew.toString());
         }
 
     }
@@ -47,16 +44,13 @@ public class AgentScreenController extends SceneController {
         String[] idArr;
         int userId = 0;
 
-        if(boxNew.isSelected()){
-            idArr = idNew.getText().split("\\s+");
+        if(boxFinished.isSelected()){
+            idArr = idFinished.getText().split("\\s+");
             userId = Integer.parseInt(idArr[1]);
             idListFinished.add(userId);
-            System.out.println("IDList=" + idListFinished.toString());
-            System.out.println("ID = " + userId);
         }
         else{
             idListFinished.remove(userId);
-            System.out.println("IDList=" + idListFinished.toString());
         }
 
     }
@@ -73,8 +67,8 @@ public class AgentScreenController extends SceneController {
             }
             System.out.println(curr.toString());
         }
-        System.out.println("READYLIST: " + PizzaLists.getList("readyList").toString());
-        System.out.println("NEWLIST: " + PizzaLists.getList("newList").toString());
+        System.out.println("READYLIST: " + PizzaLists.getList("readyList").toString() + "**Added to");
+        System.out.println("NEWLIST: " + PizzaLists.getList("newList").toString() + " **Removed from");
     }
 
     public void newToRejectedList(){
@@ -89,8 +83,8 @@ public class AgentScreenController extends SceneController {
             }
             System.out.println(curr.toString());
         }
-        System.out.println("REJECTEDLIST: " + PizzaLists.getList("rejectedList").toString());
-        System.out.println("NEWLIST: " + PizzaLists.getList("newList").toString());
+        System.out.println("REJECTEDLIST: " + PizzaLists.getList("rejectedList").toString() + "**Added to");
+        System.out.println("NEWLIST: " + PizzaLists.getList("newList").toString() + "**Removed from");
     }
 
     public void finishedListPickedUp(){

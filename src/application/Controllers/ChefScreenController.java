@@ -32,7 +32,6 @@ public class ChefScreenController extends SceneController {
             userId = Integer.parseInt(idArr[1]);
             idListReady.add(userId);
             System.out.println("IDList=" + idListReady.toString());
-            System.out.println("ID = " + userId);
         } else {
             idListReady.remove(userId);
             System.out.println("IDList=" + idListReady.toString());
@@ -49,7 +48,6 @@ public class ChefScreenController extends SceneController {
             userId = Integer.parseInt(idArr[1]);
             idListPickup.add(userId);
             System.out.println("IDList=" + idListPickup.toString());
-            System.out.println("ID = " + userId);
         } else {
             idListPickup.remove(userId);
             System.out.println("IDList=" + idListPickup.toString());
@@ -63,13 +61,15 @@ public class ChefScreenController extends SceneController {
             for (int j = 0; j < idListReady.size(); j++){
                 if (curr.getId() == idListReady.get(j)); {
                     PizzaLists.getList("cookingList").add(curr);
+                    // set a cooking timer of 15s whenever a Node is added to Cooking List
+                    startCookTimer(curr);       //Timer Method below
+                    System.out.println("Timer set:ID= " + curr.getId());
                     iterator.remove();
                 }
             }
-            System.out.println(curr.getName());
         }
-        System.out.println("COOKINGLIST: " + PizzaLists.getList("cookingList").toString());
-        System.out.println("READYLIST: " + PizzaLists.getList("readyList").toString());
+        System.out.println("COOKINGLIST: " + PizzaLists.getList("cookingList").toString() + " **Added to");
+        System.out.println("READYLIST: " + PizzaLists.getList("readyList").toString() + " **Removed from");
     }
 
     public void pickupToFinishedList(){
@@ -84,15 +84,45 @@ public class ChefScreenController extends SceneController {
             }
             System.out.println(curr.getName());
         }
-        System.out.println("PICKUPLIST: " + PizzaLists.getList("pickupList").toString());
-        System.out.println("FINISHEDLIST: " + PizzaLists.getList("finishedList").toString());
+        System.out.println("PICKUPLIST: " + PizzaLists.getList("pickupList").toString() + " **Added to");
+        System.out.println("FINISHEDLIST: " + PizzaLists.getList("finishedList").toString() + " **Removed from");
     }
 
-    public void cookingDone(){
-        Timer cook = new Timer();
-        TimerTask cookTask = new CookingTimerTask();
-        long delay = 15;
-        cook.schedule(cookTask,delay);
+    // Timer method to call to start a timer for the targetNode
+    public void startCookTimer(NodeData targetNode){
+        Timer timer = new Timer();
+        TimerTask cookTask = new CookTimerTask(targetNode);
+        //delay in miliseconds before task executes, 15s = 15,000ms
+        long delay = 15000;
+        // parameters = (task.run() to excute, time delay)
+        timer.schedule(cookTask,delay);
+    }
+
+    public class CookTimerTask extends TimerTask{
+        NodeData targetNode;
+        // constructor to pass in parameter targetNode
+        public CookTimerTask(NodeData targetNode){
+            this.targetNode = targetNode;
+        }
+
+        // run() called when timer.schedule waits "delay" ms
+        @Override
+        public void run() {
+            for (Iterator<NodeData> iterator = PizzaLists.getList("cookingList").iterator(); iterator.hasNext();) {
+                NodeData curr = iterator.next();
+                // add targetNode to pickupList, remove from cooking List
+                if (curr.getId() == targetNode.getId()); {
+                    //If GUI needs method to update display, call here
+                    PizzaLists.getList("pickupList").add(curr);
+                    iterator.remove();
+                }
+                System.out.println("COOKING DONE: " + curr.getId());
+                System.out.println("PICKUPLIST: " + PizzaLists.getList("pickupList").toString() + " **Added to");
+                System.out.println("COOKINGLIST: " + PizzaLists.getList("cookingList").toString() + " **Removed from");
+
+            }
+        }
     }
 
 }
+

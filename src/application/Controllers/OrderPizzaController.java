@@ -22,6 +22,8 @@ public class OrderPizzaController extends SceneController {
         order.updateNode("Justin Jin", 500,Status.NEW,"Cheese",toppings,"Thin Crust");
 
         PizzaLists.getList("newList").add(order);
+        // also added to allNodes List
+        PizzaLists.getList("allNodesList").add(order);
         System.out.println(("Order added to NewList"));
     }
 

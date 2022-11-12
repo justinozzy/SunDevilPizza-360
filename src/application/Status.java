@@ -5,7 +5,7 @@ public enum Status {
     NEW,        //0
     READY,      //1
     COOKING,    //2
-    PENDING,    //3
+    PICKUP,     //3
     FINISHED,   //4
     REJECT      //5
 }

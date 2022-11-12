@@ -1,7 +1,9 @@
 package application.Controllers;
 import application.PizzaLists;
+import application.Status;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
@@ -61,6 +63,7 @@ public class AgentScreenController extends SceneController {
             NodeData curr = iterator.next();
             for (int j = 0; j < idListNew.size(); j++){
                 if (curr.getId() == idListNew.get(j)); {
+                    curr.setStatus(Status.READY);
                     PizzaLists.getList("readyList").add(curr);
                     iterator.remove();
                 }
@@ -77,6 +80,7 @@ public class AgentScreenController extends SceneController {
             NodeData curr = iterator.next();
             for (int j = 0; j < idListNew.size(); j++){
                 if (curr.getId() == idListNew.get(j)); {
+                    curr.setStatus(Status.REJECT);
                     PizzaLists.getList("rejectedList").add(curr);
                     iterator.remove();
                 }
@@ -93,9 +97,17 @@ public class AgentScreenController extends SceneController {
         for (Iterator<NodeData> iterator = PizzaLists.getList("finishedList").iterator(); iterator.hasNext();) {
             NodeData curr = iterator.next();
             for (int j = 0; j < idListFinished.size(); j++){
-                if (curr.getId() == idListFinished.get(j)); {
+                if (curr.getId() == idListFinished.get(j)) {
                     iterator.remove();
+                    // Order completed, also search & remove node from allNodesList
+                    for (Iterator<NodeData> allNodesIterator = PizzaLists.getList("allNodesList").iterator(); iterator.hasNext(); ) {
+                        NodeData currAllNodes = allNodesIterator.next();
+                        if (currAllNodes.getId() == idListFinished.get(j)) {
+                            allNodesIterator.remove();
+                        }
+                    }
                 }
+
             }
             System.out.println(curr.toString());
         }

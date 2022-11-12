@@ -10,7 +10,7 @@ public class PizzaLists {
     static private LinkedList<NodeData> pickupList = new LinkedList<NodeData>();    //ready for pick-up
     static private LinkedList<NodeData> finishedList = new LinkedList<NodeData>();  //finished orders
     static private LinkedList<NodeData> rejectedList = new LinkedList<NodeData>();  //rejected orders
-    static private LinkedList<NodeData> tempList = new LinkedList<NodeData>();
+    static private LinkedList<NodeData> allNodesList = new LinkedList<NodeData>();
 
     // list getter, parameter should be string of name of the list to get.
     static public LinkedList<NodeData> getList(String listName){
@@ -27,11 +27,11 @@ public class PizzaLists {
                 return finishedList;
             case "rejectedList":
                 return rejectedList;
-            case "tempList":
-                return tempList;
+            case "allNodesList":
+                return allNodesList;
             default:
-                System.out.println("[Error] Unexpected string in PizzaList.getList(string), tempList returned as default");
-                return tempList;
+                System.out.println("[Error] Unexpected string in PizzaList.getList(string), allNodesList returned as default");
+                return allNodesList;
         }
 
     }

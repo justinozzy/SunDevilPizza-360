@@ -33,6 +33,9 @@ public class SceneController {
 	 private Label ValidWorkerID;
 	 @FXML
 	 private Label ValidWorkerPassword;
+
+	 //when student logs in, store their ID, default -1 (Not logged in), used by CheckOrders function in MainMenuController
+	 public static int currStudentID = -1;
 	 
 	 public void switchToMainMenu(ActionEvent event) throws IOException {
 		 root = FXMLLoader.load(getClass().getResource("../Panes/MainMenu.fxml"));
@@ -58,6 +61,13 @@ public class SceneController {
 		 stage.show();
 	 }
 	 public void switchToStudentMenu(ActionEvent event) throws IOException {
+		 // !!! student login needs implementation, below is what i guess would be added based on WorkerLogin
+		 /* if (PizzaDatabase.getStudent(StudentID.getText(), StudentPassword.getText()) == 1);
+		 		{
+		 		currStudentID = StudentID.getText();  // add this line
+		 		switch to studentMenuPane
+		 		}
+		  */
 		 root = FXMLLoader.load(getClass().getResource("../Panes/StudentMenu.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);

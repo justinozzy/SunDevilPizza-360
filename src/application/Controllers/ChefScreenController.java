@@ -1,6 +1,7 @@
 package application.Controllers;
 import application.NodeData;
 import application.PizzaLists;
+import application.Status;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -39,7 +40,7 @@ public class ChefScreenController extends SceneController {
     }
 
     public void addIDListPickup(ActionEvent event) {
-        //Call upon readyOrder checkboxes actions
+        //Call upon pickupOrder checkboxes actions
         String[] idArr;
         int userId = 0;
 
@@ -60,6 +61,7 @@ public class ChefScreenController extends SceneController {
             NodeData curr = iterator.next();
             for (int j = 0; j < idListReady.size(); j++){
                 if (curr.getId() == idListReady.get(j)); {
+                    curr.setStatus(Status.COOKING);
                     PizzaLists.getList("cookingList").add(curr);
                     // set a cooking timer of 15s whenever a Node is added to Cooking List
                     startCookTimer(curr);       //Timer Method below
@@ -73,11 +75,12 @@ public class ChefScreenController extends SceneController {
     }
 
     public void pickupToFinishedList(){
-        //Call upon readyOrder confirmCooking button
+        //Call upon pickupOrder confirmPickup button
         for (Iterator<NodeData> iterator = PizzaLists.getList("pickupList").iterator(); iterator.hasNext();) {
             NodeData curr = iterator.next();
             for (int j = 0; j < idListPickup.size(); j++){
                 if (curr.getId() == idListPickup.get(j)); {
+                    curr.setStatus(Status.FINISHED);
                     PizzaLists.getList("finishedList").add(curr);
                     iterator.remove();
                 }
@@ -98,6 +101,7 @@ public class ChefScreenController extends SceneController {
         timer.schedule(cookTask,delay);
     }
 
+    //Helper class for TimerTask
     public class CookTimerTask extends TimerTask{
         NodeData targetNode;
         // constructor to pass in parameter targetNode
@@ -113,6 +117,7 @@ public class ChefScreenController extends SceneController {
                 // add targetNode to pickupList, remove from cooking List
                 if (curr.getId() == targetNode.getId()); {
                     //If GUI needs method to update display, call here
+                    curr.setStatus(Status.PICKUP);
                     PizzaLists.getList("pickupList").add(curr);
                     iterator.remove();
                 }

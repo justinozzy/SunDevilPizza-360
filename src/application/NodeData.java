@@ -55,4 +55,10 @@ public class NodeData {
         return toppings;
     }
 
+    //LinkList toString returns id of Node
+    @Override
+    public String toString(){
+        return ""+this.id;
+    }
+
 }

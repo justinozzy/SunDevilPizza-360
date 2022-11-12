@@ -19,8 +19,7 @@ public class OrderPizzaController extends SceneController {
         // status always = NEW at this point
         String[] toppings = new String[3];
         toppings[0] = "Chicken";
-        order.updateNode("Justin Jin", 1,Status.NEW,"Cheese",toppings,"Thin Crust");
-
+        order.updateNode("Justin Jin", 500,Status.NEW,"Cheese",toppings,"Thin Crust");
 
         PizzaLists.getList("newList").add(order);
         System.out.println(("Order added to NewList"));
@@ -37,7 +36,7 @@ public class OrderPizzaController extends SceneController {
         //Print each order in the newList
         for (Iterator<NodeData> iterator = PizzaLists.getList("newList").iterator(); iterator.hasNext();) {
             NodeData curr = iterator.next();
-            System.out.println("NewList: " + curr.getName());
+            System.out.println("NewList: " + curr.getId());
         }
     }
 }

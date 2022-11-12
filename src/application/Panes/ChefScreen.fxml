@@ -44,8 +44,8 @@
             <Font size="15.0" />
          </font>
       </CheckBox>
-      <Button layoutX="66.0" layoutY="360.0" mnemonicParsing="false" text="Confirm Cooking" />
-      <Button layoutX="384.0" layoutY="360.0" mnemonicParsing="false" text="Confirm Ready for Pickup" />
+      <Button layoutX="66.0" layoutY="360.0" onAction="#readyToCookingList" mnemonicParsing="false" text="Confirm Cooking" />
+      <Button layoutX="384.0" layoutY="360.0" onAction="#pickupToFinishedList" mnemonicParsing="false" text="Confirm Ready for Pickup" />
       <Button layoutX="540.0" layoutY="1.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Log Out" />
       <Label layoutX="66.0" layoutY="165.0" text="Type: Cheese Pizza" />
       <Label layoutX="66.0" layoutY="185.0" text="Topping: Chicken" />

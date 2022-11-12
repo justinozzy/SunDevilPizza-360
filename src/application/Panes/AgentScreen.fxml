@@ -22,13 +22,13 @@
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Label>
-      <CheckBox fx:id="temp" onAction="#addIDList" layoutX="37.0" layoutY="95.0" mnemonicParsing="false" wrapText="true">
+      <CheckBox fx:id="boxNew" onAction="#addIDListNew" layoutX="37.0" layoutY="95.0" mnemonicParsing="false" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
       </CheckBox>
       <Label layoutX="67.0" layoutY="97.0" text="Name: Justin Jin" />
-      <Label fx:id="id" layoutX="67.0" layoutY="117.0" text="ID#: 500" />
+      <Label fx:id="idNew" layoutX="67.0" layoutY="117.0" text="ID#: 500" />
       <Label layoutX="67.0" layoutY="135.0" text="Order: Cheese Pizza, Chicken, Thin Crust" />
       <CheckBox layoutX="36.0" layoutY="153.0" mnemonicParsing="false" wrapText="true">
          <font>
@@ -55,8 +55,8 @@
       <Label layoutX="68.0" layoutY="291.0" text="ID#: 1214206969" />
       <Label layoutX="68.0" layoutY="309.0" text="Order: Cheese Pizza, Chicken, Thin Crust" />
       <Button layoutX="67.0" layoutY="348.0" onAction="#newToReadyList" mnemonicParsing="false" text="Confirm" />
-      <Button layoutX="230.0" layoutY="348.0" mnemonicParsing="false" text="Reject" />
-      <Button layoutX="385.0" layoutY="348.0" mnemonicParsing="false" text="Confirm Picked-Up" />
+      <Button layoutX="230.0" layoutY="348.0" onAction="#newToRejectedList" mnemonicParsing="false" text="Reject" />
+      <Button layoutX="385.0" layoutY="348.0" onAction="#finishedListPickedUp" mnemonicParsing="false" text="Confirm Picked-Up" />
       <Button layoutX="540.0" layoutY="1.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Log Out" />
       <CheckBox layoutX="327.0" layoutY="97.0" mnemonicParsing="false" wrapText="true">
          <font>

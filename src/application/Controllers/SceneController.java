@@ -32,6 +32,8 @@ public class SceneController {
 		 root = FXMLLoader.load(getClass().getResource("../Panes/MainMenu.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
+		 String css = this.getClass().getResource("Panes/application.css").toExternalForm();
+		 scene.getStylesheets().add(css);
 		 stage.setScene(scene);
 		 stage.show();
 	 }
@@ -41,6 +43,8 @@ public class SceneController {
 		 System.out.println("root="+root);
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
+		 String css = this.getClass().getResource("Panes/application.css").toExternalForm();
+		 scene.getStylesheets().add(css);
 		 stage.setScene(scene);
 		 stage.show();
 	 }
@@ -49,6 +53,8 @@ public class SceneController {
 		 root = FXMLLoader.load(getClass().getResource("../Panes/WorkerLogInScreen.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
+		 String css = this.getClass().getResource("Panes/application.css").toExternalForm();
+		 scene.getStylesheets().add(css);
 		 stage.setScene(scene);
 		 stage.show();
 	 }
@@ -56,6 +62,8 @@ public class SceneController {
 		 root = FXMLLoader.load(getClass().getResource("../Panes/StudentMenu.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
+		 String css = this.getClass().getResource("Panes/application.css").toExternalForm();
+		 scene.getStylesheets().add(css);
 		 stage.setScene(scene);
 		 stage.show();
 	 }
@@ -63,6 +71,8 @@ public class SceneController {
 		 root = FXMLLoader.load(getClass().getResource("../Panes/OrderPizza.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
+		 String css = this.getClass().getResource("Panes/application.css").toExternalForm();
+		 scene.getStylesheets().add(css);
 		 stage.setScene(scene);
 		 stage.show();
 	 }
@@ -70,6 +80,8 @@ public class SceneController {
 		 root = FXMLLoader.load(getClass().getResource("../Panes/ReviewOrder.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
+		 String css = this.getClass().getResource("Panes/application.css").toExternalForm();
+		 scene.getStylesheets().add(css);
 		 stage.setScene(scene);
 		 stage.show();
 	 }
@@ -77,6 +89,8 @@ public class SceneController {
 		 root = FXMLLoader.load(getClass().getResource("../Panes/CheckOrders.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
+		 String css = this.getClass().getResource("Panes/application.css").toExternalForm();
+		 scene.getStylesheets().add(css);
 		 stage.setScene(scene);
 		 stage.show();
 	 }
@@ -85,12 +99,16 @@ public class SceneController {
 			 root = FXMLLoader.load(getClass().getResource("../Panes/AgentScreen.fxml"));
 			 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			 scene = new Scene(root);
+			 String css = this.getClass().getResource("Panes/application.css").toExternalForm();
+			 scene.getStylesheets().add(css);
 			 stage.setScene(scene);
 			 stage.show();
 		 } else if (WorkerID.getText().toString().equals("chef")) {
 			 root = FXMLLoader.load(getClass().getResource("../Panes/ChefScreen.fxml"));
 			 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			 scene = new Scene(root);
+			 String css = this.getClass().getResource("Panes/application.css").toExternalForm();
+			 scene.getStylesheets().add(css);
 			 stage.setScene(scene);
 			 stage.show();
 		 } else {ValidWorkerID.setText("Invalid ID");}

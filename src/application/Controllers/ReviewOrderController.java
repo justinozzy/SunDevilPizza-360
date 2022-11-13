@@ -5,6 +5,7 @@ import application.PizzaLists;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -12,6 +13,11 @@ import java.util.Iterator;
 public class ReviewOrderController extends SceneController {
     @FXML
     private Button ConfirmButton;
+    @FXML
+    private TextField ReviewName;
+    @FXML
+    private TextField ReviewID;
+
     private NodeData temp = PizzaLists.getList("tempList").get(0);
 
     public void createNewOrder(NodeData order){
@@ -27,6 +33,8 @@ public class ReviewOrderController extends SceneController {
     public void handleConfirmation(ActionEvent event) throws IOException {
         //Create a new order and switch to the main menu
         switchToMainMenu(event);
+        temp.setName(ReviewName.getText());
+        temp.setId(Integer.parseInt(ReviewID.getText()));
         createNewOrder(temp);
         ConfirmButton.setDisable(true);
 

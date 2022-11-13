@@ -37,6 +37,14 @@ public class NodeData {
         this.status = status;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Status getStatus() {
         return status;
     }

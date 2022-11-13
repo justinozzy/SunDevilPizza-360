@@ -2,15 +2,19 @@ package application.Controllers;
 
 import java.io.IOException;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import application.IdLists;
 import application.PizzaDatabase;
 import application.PizzaLists;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -58,22 +62,47 @@ public class SceneController {
 	 public static int currStudentID = -1;
 //if there is a waya we can wait for a controller or handler ot finish runnign and hten do some action, then we can skip the initialization
 	public void createCheckBox(LinkedList<NodeData> list, VBox VB)  {
+		ArrayList<Integer> idList = new ArrayList<>();
+		int[] cbInfo = new int[2];
+		int count = 0;
 		VB.setSpacing(5);
 
 		for(Iterator<NodeData> iterator = list.iterator(); iterator.hasNext();){
+			StringBuilder toppings = new StringBuilder();
 			NodeData curr = iterator.next();
 
-			String topping = Arrays.toString(curr.getToppings());
-			topping = topping.replaceAll("[\\[\\]]","");
-			topping = topping.replaceAll("[,]", " ");
-			String info = "Name: " + curr.getName() + "\n" + "Id: " + curr.getId() + "\n" +  "Order: " + curr.getBase() + " " +  curr.getBake() + " " +  topping;
+			for (int i = 0; i < 3; i++) {
+				if (curr.getToppings()[i] != null) {
+					toppings.append(String.format(" %s", curr.getToppings()[i]));
+				}
+			}
+			idList.add(curr.getId());
+			String info = "Name: " + curr.getName() + "\n" + "Id: " + curr.getId() + "\n" +  "Order: " + curr.getBase() + " " +  curr.getBake() + toppings;
 
 			CheckBox cb = new CheckBox(info);
+			cb.setId(Integer.toString(count));
 			cb.setWrapText(true);
 			cb.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-			VB.getChildren().add(cb);
-		}
 
+			cbInfo[0] = curr.getId();
+			cbInfo[1] = count;
+			String agentList = String.format("Agent%s", );
+
+			EventHandler<ActionEvent> event = e -> {
+				if (cb.isSelected()) {
+					System.out.println(agentList);
+					IdLists.getIdLists(agentList).add(cbInfo);
+				}
+				else {
+					IdLists.getIdLists(agentList).remove(cbInfo);
+				}
+				System.out.println("Selected newOrders: " + IdLists.getIdLists("AgentnewList").toString());
+			};
+
+			cb.setOnAction(event);
+			VB.getChildren().add(cb);
+			count++;
+		}
 	}
 
 	 public void switchToMainMenu(ActionEvent event) throws IOException {

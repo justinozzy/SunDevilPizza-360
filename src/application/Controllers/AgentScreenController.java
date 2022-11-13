@@ -3,6 +3,7 @@ import application.PizzaLists;
 import application.Status;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
@@ -22,9 +23,8 @@ public class AgentScreenController extends SceneController {
     private CheckBox boxFinished;
     @FXML
     private Label idFinished;
-
     @FXML
-    private ScrollPane AgentNewOrdersScroll;
+    private Button AgentGetOrdersButton;
 
     private ArrayList<Integer> idListNew = new ArrayList<Integer>();
     private ArrayList<Integer> idListFinished = new ArrayList<Integer>();
@@ -100,6 +100,7 @@ public class AgentScreenController extends SceneController {
 
 
     public void AgentGetInfo(){
+        AgentGetOrdersButton.setDisable(true);
         //New Orders
         NodeData data = new NodeData();
         String[] topTest = {"Chicken", "", ""};

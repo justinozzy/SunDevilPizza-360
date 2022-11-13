@@ -67,27 +67,33 @@ public class SceneController {
 		int count = 0;
 		VB.setSpacing(5);
 
-		for(Iterator<NodeData> iterator = list.iterator(); iterator.hasNext();){
+		//Iterate through the linked list that is called
+		for (Iterator<NodeData> iterator = list.iterator(); iterator.hasNext();){
 			StringBuilder toppings = new StringBuilder();
 			NodeData curr = iterator.next();
 
+			//Check which toppings were selected
 			for (int i = 0; i < 3; i++) {
 				if (curr.getToppings()[i] != null) {
 					toppings.append(String.format(" %s", curr.getToppings()[i]));
 				}
 			}
+			//Add id to the list of ids that will be checked
 			idList.add(curr.getId());
 			String info = "Name: " + curr.getName() + "\n" + "Id: " + curr.getId() + "\n" +  "Order: " + curr.getBase() + " " +  curr.getBake() + toppings;
 
+			//Create checkboxes
 			CheckBox cb = new CheckBox(info);
 			cb.setId(Integer.toString(count));
 			cb.setWrapText(true);
 			cb.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
+			//Create array of objects needed to determine which checkboxes are selected later on (BAD CODE!!!)
 			cbInfo[0] = curr.getId();
 			cbInfo[1] = count;
-			String agentList = String.format("Agent%s", );
+			String agentList = String.format("Agent%s", PizzaLists.getName(list));
 
+			//Add event handlers for when a checkbox is selected
 			EventHandler<ActionEvent> event = e -> {
 				if (cb.isSelected()) {
 					System.out.println(agentList);
@@ -96,9 +102,10 @@ public class SceneController {
 				else {
 					IdLists.getIdLists(agentList).remove(cbInfo);
 				}
-				System.out.println("Selected newOrders: " + IdLists.getIdLists("AgentnewList").toString());
+				System.out.println("Selected Orders: " + IdLists.getIdLists(agentList).toString());
 			};
 
+			//Add checkboxes to the VBox
 			cb.setOnAction(event);
 			VB.getChildren().add(cb);
 			count++;

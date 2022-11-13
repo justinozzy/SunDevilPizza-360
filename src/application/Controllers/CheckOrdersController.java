@@ -28,18 +28,21 @@ public class CheckOrdersController extends SceneController implements Initializa
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //Get all the nodes and iterate through them
         for (Iterator<NodeData> iterator = PizzaLists.getList("allNodesList").iterator(); iterator.hasNext();) {
             Label orderLabels;
             Label statusLabels;
             NodeData curr = iterator.next();
             StringBuilder toppings = new StringBuilder();
 
+            //Build toppings string with selected toppings
             for (int i = 0; i < 3; i++) {
                 if (curr.getToppings()[i] != null) {
                     toppings.append(String.format(" %s", curr.getToppings()[i]));
                 }
             }
 
+            //Determine if the ID of the student matches this node and print it to the string if it does
             if (curr.getId() == newId) {
                 orderLabels = new Label(String.format("%s %s pizza with%s\n", curr.getBake(), curr.getBase(),
                         toppings));

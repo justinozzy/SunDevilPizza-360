@@ -12,7 +12,6 @@ public class IdLists {
     static private ArrayList<int[]> AgentrejectedList = new ArrayList<>();  //rejected orders
     static private ArrayList<int[]> AgentallNodesList = new ArrayList<>();
 
-    static public String getName(LinkedList<int[]>)
 
     static public ArrayList<int[]> getIdLists(String listName){
             switch(listName){

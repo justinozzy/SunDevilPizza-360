@@ -5,13 +5,18 @@ import application.PizzaDatabase;
 import application.PizzaLists;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 
 import java.io.IOException;
+import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class ReviewOrderController extends SceneController {
     @FXML
@@ -20,6 +25,7 @@ public class ReviewOrderController extends SceneController {
     private TextField ReviewName;
     @FXML
     private TextField ReviewID;
+    private static Integer newId;
 
     private NodeData temp = PizzaLists.getList("tempList").get(0);
 
@@ -58,4 +64,5 @@ public class ReviewOrderController extends SceneController {
             System.out.println("Error");
         }
     }
+
 }

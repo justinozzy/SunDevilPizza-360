@@ -22,7 +22,7 @@
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="66.0" layoutY="360.0" mnemonicParsing="false" onAction="#readyToCookingList" text="Confirm Cooking" />
+      <Button layoutX="66.0" layoutY="360.0" mnemonicParsing="false" onAction="#cookingTimerDisplay" text="Confirm Cooking" />
       <Button layoutX="384.0" layoutY="360.0" mnemonicParsing="false" onAction="#pickupToFinishedList" text="Confirm Ready for Pickup" />
       <Button layoutX="540.0" layoutY="1.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Log Out" />
       <Label layoutX="254.0" layoutY="66.0" text="Cooking">

@@ -106,9 +106,17 @@ public class AgentScreenController extends SceneController {
 
                     for (int i = 0; i < AgentFinishedOrdersVB.getChildren().size(); i++) {
                         if (Integer.toString(cbId[0]).equals(AgentFinishedOrdersVB.getChildren().get(i).getId())) {
-                            AgentNewOrdersVB.getChildren().remove(i);
+                            AgentFinishedOrdersVB.getChildren().remove(i);
                         }
                     }
+
+                    for (Iterator<NodeData> iterator2 = PizzaLists.getList("allNodesList").iterator(); iterator2.hasNext(); ) {
+                        NodeData curr2 = iterator2.next();
+                        if(curr2.equals(curr)){
+                            iterator2.remove();
+                        }
+                    }
+
                     iterator.remove();
                     System.out.println(curr);
                     break;

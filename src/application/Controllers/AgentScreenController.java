@@ -99,7 +99,7 @@ public class AgentScreenController extends SceneController {
 
 
 
-    public void getInfo(){
+    public void AgentGetInfo(){
         //New Orders
         NodeData data = new NodeData();
         String[] topTest = {"Chicken", "", ""};

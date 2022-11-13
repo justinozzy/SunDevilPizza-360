@@ -48,7 +48,7 @@
             <VBox fx:id="AgentFinishedOrdersVB" prefHeight="241.0" prefWidth="278.0" />
          </content>
       </ScrollPane>
-      <Button fx:id="AgentGetOrdersButton" layoutX="458.0" layoutY="1.0" mnemonicParsing="false" onAction="#getInfo" text="Get Orders">
+      <Button fx:id="AgentGetOrdersButton" layoutX="458.0" layoutY="1.0" mnemonicParsing="false" onAction="#AgentGetInfo" text="Get Orders">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

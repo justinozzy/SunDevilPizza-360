@@ -43,9 +43,19 @@ public class SceneController {
 	 public VBox AgentNewOrdersVB;
 
 	@FXML
-	public VBox AgentFinishedOrdersVB;
+	 public VBox AgentFinishedOrdersVB;
+	@FXML
+	public VBox ChefReadyToCookVB;
 
-	 //when student logs in, store their ID, default -1 (Not logged in), used by CheckOrders function in MainMenuController
+	@FXML
+	public VBox ChefCookingVB;
+
+	@FXML
+	public VBox ChefReadyForPickupVB;
+
+
+
+	//when student logs in, store their ID, default -1 (Not logged in), used by CheckOrders function in MainMenuController
 	 public static int currStudentID = -1;
 //if there is a waya we can wait for a controller or handler ot finish runnign and hten do some action, then we can skip the initialization
 	public void createCheckBox(LinkedList<NodeData> list, VBox VB)  {
@@ -148,8 +158,9 @@ public class SceneController {
 				 root = FXMLLoader.load(getClass().getResource("../Panes/AgentScreen.fxml"));
 				 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				 //Our VBox doesnt exist and we want to load it. But how?
-				 AgentScreenController controller;
 				 scene = new Scene(root);
+				 String css = this.getClass().getResource("../Panes/application.css").toExternalForm();
+				 scene.getStylesheets().add(css);
 				 stage.setScene(scene);
 				 stage.show();
 				 return 1;
@@ -159,6 +170,8 @@ public class SceneController {
 				 root = FXMLLoader.load(getClass().getResource("../Panes/ChefScreen.fxml"));
 				 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				 scene = new Scene(root);
+				 String css = this.getClass().getResource("../Panes/application.css").toExternalForm();
+				 scene.getStylesheets().add(css);
 				 stage.setScene(scene);
 				 stage.show();
 				 return 2;

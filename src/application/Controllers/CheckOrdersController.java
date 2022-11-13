@@ -21,6 +21,8 @@ public class CheckOrdersController extends SceneController implements Initializa
     private VBox OrdersVBox;
     @FXML
     private VBox StatusVBox;
+    @FXML
+    private Label CheckOrderNameLabel;
 
     public static void setStudentId(Integer id) {
         newId = id;
@@ -51,6 +53,9 @@ public class CheckOrdersController extends SceneController implements Initializa
                 OrdersVBox.getChildren().add(orderLabels);
                 StatusVBox.getChildren().add(statusLabels);
             }
+
+            //Bad Code: runs multiple times to set the label, could be done better
+            CheckOrderNameLabel.setText("Logged in as " + curr.getName());
         }
     }
 }

@@ -38,6 +38,8 @@ public class SceneController {
 
 	 @FXML
 	 private VBox AgentNewOrdersVB;
+	 @FXML
+	 private VBox AgentFinishedOrdersVB;
 
 	 //when student logs in, store their ID, default -1 (Not logged in), used by CheckOrders function in MainMenuController
 	 public static int currStudentID = -1;
@@ -45,8 +47,15 @@ public class SceneController {
 	public void createCheckBox(String list)  {
 		AgentNewOrdersVB.setSpacing(5);
 		for(int n = 0; n < 3; n++) {
-			CheckBox cb = new CheckBox();
+			String test = " Name: Joe Mama \n ID#: 69 \n Pizza: Krusty Krab Pizza";
+			CheckBox cb = new CheckBox(test);
 			AgentNewOrdersVB.getChildren().add(cb);
+		}
+		AgentFinishedOrdersVB.setSpacing(5);
+		for(int n = 0; n < 3; n++) {
+			String test = " Name: Joe Mama \n ID#: 69 \n Pizza: Krusty Krab Pizza";
+			CheckBox cb = new CheckBox(test);
+			AgentFinishedOrdersVB.getChildren().add(cb);
 		}
 	}
 

@@ -36,19 +36,17 @@ public class SceneController {
 	 @FXML
 	 private Label ValidWorkerPassword;
 
-	@FXML
-	private VBox AgentNewOrdersVB;
+	 @FXML
+	 private VBox AgentNewOrdersVB;
 
 	 //when student logs in, store their ID, default -1 (Not logged in), used by CheckOrders function in MainMenuController
 	 public static int currStudentID = -1;
-
+//if there is a waya we can wait for a controller or handler ot finish runnign and hten do some action, then we can skip the initialization
 	public void createCheckBox(String list)  {
-		CheckBox checkBox[] = new CheckBox[3];
-		VBox vb = new VBox();
+		AgentNewOrdersVB.setSpacing(5);
 		for(int n = 0; n < 3; n++) {
-			checkBox[n] = new CheckBox();
-			vb.getChildren().add(checkBox[n]);
-			vb.setSpacing(5);
+			CheckBox cb = new CheckBox();
+			AgentNewOrdersVB.getChildren().add(cb);
 		}
 	}
 
@@ -125,6 +123,7 @@ public class SceneController {
 		 stage.setScene(scene);
 		 stage.show();
 	 }
+
 	 public int switchToWorkerScreen(ActionEvent event) throws IOException {
 		 //Verify the login information
 		 try {
@@ -132,6 +131,8 @@ public class SceneController {
 			 if (PizzaDatabase.getEmployee(WorkerID.getText(), WorkerPassword.getText()) == 1) {
 				 root = FXMLLoader.load(getClass().getResource("../Panes/AgentScreen.fxml"));
 				 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				 //Our VBox doesnt exist and we want to load it. But how?
+				 AgentScreenController controller;
 				 scene = new Scene(root);
 				 stage.setScene(scene);
 				 stage.show();

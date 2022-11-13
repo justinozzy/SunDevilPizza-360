@@ -24,7 +24,7 @@
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="67.0" layoutY="348.0" mnemonicParsing="false" onAction="#newToReadyList" text="Confirm" />
+      <Button fx:id="AgentConfirmButton" layoutX="67.0" layoutY="348.0" mnemonicParsing="false" onAction="#newToReadyList" text="Confirm" />
       <Button layoutX="230.0" layoutY="348.0" mnemonicParsing="false" onAction="#newToRejectedList" text="Reject" />
       <Button layoutX="385.0" layoutY="348.0" mnemonicParsing="false" onAction="#finishedListPickedUp" text="Confirm Picked-Up" />
       <Button layoutX="540.0" layoutY="1.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Log Out" />
@@ -48,5 +48,10 @@
             <VBox fx:id="AgentFinishedOrdersVB" prefHeight="241.0" prefWidth="278.0" />
          </content>
       </ScrollPane>
+      <Button fx:id="AgentGetOrdersButton" layoutX="458.0" layoutY="1.0" mnemonicParsing="false" onAction="#getInfo" text="Get Orders">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

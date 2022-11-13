@@ -102,6 +102,9 @@ public class AgentScreenController extends SceneController {
         System.out.println("NEWLIST: " + PizzaLists.getList("newList").toString() + "**Removed from");
     }
 
+    public void getInfo(){
+        createCheckBox("e");
+    }
     public void finishedListPickedUp(){
         //Call upon finishedOrder [Confirmed Picked-Up] button
         //When a finished order is selected and Picked-Up, order completed, remove it from finished list.

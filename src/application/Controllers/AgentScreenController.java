@@ -3,16 +3,15 @@ import application.PizzaLists;
 import application.Status;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+
 import application.NodeData;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
 
 public class AgentScreenController extends SceneController {
     @FXML
@@ -30,7 +29,8 @@ public class AgentScreenController extends SceneController {
     private ArrayList<Integer> idListNew = new ArrayList<Integer>();
     private ArrayList<Integer> idListFinished = new ArrayList<Integer>();
 
-
+    private LinkedList<NodeData> test = new LinkedList<NodeData>();
+    private LinkedList<NodeData> finishedTest = new LinkedList<NodeData>();
 
 
     public void addIDListNew(ActionEvent event){
@@ -46,12 +46,8 @@ public class AgentScreenController extends SceneController {
         else{
             idListNew.remove(userId);
         }
-
     }
 
-    public void createCheckBoxes(ActionEvent event){
-
-    }
     public void addIDListFinished(ActionEvent event){
         //call upon finishedOrder checkboxes actions
         String[] idArr;
@@ -65,7 +61,6 @@ public class AgentScreenController extends SceneController {
         else{
             idListFinished.remove(userId);
         }
-
     }
 
     public void newToReadyList(){
@@ -102,8 +97,27 @@ public class AgentScreenController extends SceneController {
         System.out.println("NEWLIST: " + PizzaLists.getList("newList").toString() + "**Removed from");
     }
 
+
+
     public void getInfo(){
-        createCheckBox("e");
+        //New Orders
+        NodeData data = new NodeData();
+        String[] topTest = {"Chicken", "", ""};
+        data.updateNode("test", 43, Status.NEW, "Cheese", topTest , "Pan");
+        test.add(data);
+        //testing if we can do it x2
+        NodeData data2 = new NodeData();
+        String[] topTest2 = {"Mushroom", "", ""};
+        data2.updateNode("e", 69, Status.NEW, "Cheese", topTest2 , "Pan");
+        test.add(data2);
+        createCheckBox(test, AgentNewOrdersVB);
+
+        //Finished Orders
+        NodeData d = new NodeData();
+        String[] t = {"Chicken", "", ""};
+        d.updateNode("Finishedtest", 70, Status.NEW, "Cheese", t , "Pan");
+        finishedTest.add(d);
+        createCheckBox(finishedTest, AgentFinishedOrdersVB);
     }
     public void finishedListPickedUp(){
         //Call upon finishedOrder [Confirmed Picked-Up] button

@@ -1,0 +1,17 @@
+Index: src/application/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n//Majd Salti ID#1218690330 TH Janaka Balasooriya 9am\r\npackage application;\r\n \r\nimport javafx.application.Application;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.stage.Stage;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\n\r\npublic class Main extends Application {\r\n \r\n @Override\r\n public void start(Stage stage) {\r\n  try {\r\n   \r\n   Parent root = FXMLLoader.load(getClass().getResource(\"Panes/MainMenu.fxml\"));\r\n   Scene scene = new Scene(root);\r\n   stage.setScene(scene);\r\n   stage.show();\r\n   // test\r\n  } catch(Exception e) {\r\n   e.printStackTrace();\r\n  }\r\n } \r\n\r\n public static void main(String[] args) {\r\n  launch(args);\r\n }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/application/Main.java b/src/application/Main.java
+--- a/src/application/Main.java	(revision ca54cd4ca7097131529ad7f84afe37279f437c9e)
++++ b/src/application/Main.java	(date 1667975608345)
+@@ -1,5 +1,6 @@
+ 
+ //Majd Salti ID#1218690330 TH Janaka Balasooriya 9am
++//Kaitlyn Millar
+ package application;
+  
+ import javafx.application.Application;

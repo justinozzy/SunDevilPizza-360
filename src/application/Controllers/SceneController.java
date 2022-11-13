@@ -2,6 +2,9 @@ package application.Controllers;
 
 import java.io.IOException;
 import java.sql.SQLOutput;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import application.PizzaDatabase;
 import application.PizzaLists;
@@ -37,26 +40,30 @@ public class SceneController {
 	 private Label ValidWorkerPassword;
 
 	 @FXML
-	 private VBox AgentNewOrdersVB;
-	 @FXML
-	 private VBox AgentFinishedOrdersVB;
+	 public VBox AgentNewOrdersVB;
+
+	@FXML
+	public VBox AgentFinishedOrdersVB;
 
 	 //when student logs in, store their ID, default -1 (Not logged in), used by CheckOrders function in MainMenuController
 	 public static int currStudentID = -1;
 //if there is a waya we can wait for a controller or handler ot finish runnign and hten do some action, then we can skip the initialization
-	public void createCheckBox(String list)  {
-		AgentNewOrdersVB.setSpacing(5);
-		for(int n = 0; n < 3; n++) {
-			String test = " Name: Joe Mama \n ID#: 69 \n Pizza: Krusty Krab Pizza";
-			CheckBox cb = new CheckBox(test);
-			AgentNewOrdersVB.getChildren().add(cb);
+	public void createCheckBox(LinkedList<NodeData> list, VBox VB)  {
+		VB.setSpacing(5);
+
+		for(Iterator<NodeData> iterator = list.iterator(); iterator.hasNext();){
+			NodeData curr = iterator.next();
+
+			String topping = Arrays.toString(curr.getToppings());
+			topping = topping.replaceAll("[\\[\\]]","");
+			topping = topping.replaceAll("[,]", " ");
+			String info = "Name: " + curr.getName() + "\n" + "Id: " + curr.getId() + "\n" +  "Order: " + curr.getBase() + " " +  curr.getBake() + " " +  topping;
+
+			CheckBox cb = new CheckBox(info);
+			VB.getChildren().add(cb);
+
 		}
-		AgentFinishedOrdersVB.setSpacing(5);
-		for(int n = 0; n < 3; n++) {
-			String test = " Name: Joe Mama \n ID#: 69 \n Pizza: Krusty Krab Pizza";
-			CheckBox cb = new CheckBox(test);
-			AgentFinishedOrdersVB.getChildren().add(cb);
-		}
+
 	}
 
 	 public void switchToMainMenu(ActionEvent event) throws IOException {

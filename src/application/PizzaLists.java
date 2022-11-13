@@ -4,6 +4,7 @@ import java.util.LinkedList;
 public class PizzaLists {
     //Initialize linked lists, default empty
     //The linked list Nodes are different from the Node class, the LinkedList Nodes contains data = Node Class;
+    static private LinkedList<NodeData> tempList = new LinkedList<NodeData>();       //Temp order
     static private LinkedList<NodeData> newList = new LinkedList<NodeData>();       //New orders
     static private LinkedList<NodeData> readyList = new LinkedList<NodeData>();     //ready to cook
     static private LinkedList<NodeData> cookingList = new LinkedList<NodeData>();   //cooking
@@ -15,6 +16,8 @@ public class PizzaLists {
     // list getter, parameter should be string of name of the list to get.
     static public LinkedList<NodeData> getList(String listName){
         switch(listName){
+            case "tempList":
+                return tempList;
             case "newList":
                 return newList;
             case "readyList":

@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Arrays;
+
 public class NodeData {
     //Initialize variables, default empty
     private String name = "";
@@ -58,7 +60,8 @@ public class NodeData {
     //LinkList toString returns id of Node
     @Override
     public String toString(){
-        return ""+this.id;
+        return String.format("Name: %s\n ID: %d\n Status: %s\n Base: %s\n Bake: %s\n Toppings: %s\n",
+                this.name, this.id, this.status, this.base, this.bake, Arrays.toString(this.toppings));
     }
 
 }

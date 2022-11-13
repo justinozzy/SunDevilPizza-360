@@ -8,15 +8,14 @@ import java.util.LinkedList;
 
 import application.PizzaDatabase;
 import application.PizzaLists;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -24,11 +23,10 @@ import javafx.scene.Node;
 import application.NodeData;
 
 public class SceneController {
-	 NodeData temp = new NodeData();
 	 private Stage stage;
 	 private Scene scene;
 	 private Parent root;
-	 
+
 	 @FXML
 	 private TextField WorkerID;
 	 @FXML

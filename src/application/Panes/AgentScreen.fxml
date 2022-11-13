@@ -3,7 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -22,45 +24,13 @@
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Label>
-      <CheckBox fx:id="boxNew" onAction="#addIDListNew" layoutX="37.0" layoutY="95.0" mnemonicParsing="false" wrapText="true">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </CheckBox>
-      <Label layoutX="67.0" layoutY="97.0" text="Name: Justin Jin" />
-      <Label fx:id="idNew" layoutX="67.0" layoutY="117.0" text="ID#: 500" />
-      <Label layoutX="67.0" layoutY="135.0" text="Order: Cheese Pizza, Chicken, Thin Crust" />
-      <CheckBox layoutX="36.0" layoutY="153.0" mnemonicParsing="false" wrapText="true">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </CheckBox>
-      <Label layoutX="66.0" layoutY="155.0" text="Name: John Smith" />
-      <Label layoutX="66.0" layoutY="175.0" text="ID#: 1214206969" />
-      <Label layoutX="66.0" layoutY="193.0" text="Order: Cheese Pizza, Chicken, Thin Crust" />
-      <CheckBox layoutX="38.0" layoutY="211.0" mnemonicParsing="false" wrapText="true">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </CheckBox>
-      <Label layoutX="68.0" layoutY="213.0" text="Name: John Smith" />
-      <Label layoutX="68.0" layoutY="233.0" text="ID#: 1214206969" />
-      <Label layoutX="68.0" layoutY="251.0" text="Order: Cheese Pizza, Chicken, Thin Crust" />
-      <CheckBox layoutX="38.0" layoutY="269.0" mnemonicParsing="false" wrapText="true">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </CheckBox>
-      <Label layoutX="68.0" layoutY="271.0" text="Name: John Smith" />
-      <Label layoutX="68.0" layoutY="291.0" text="ID#: 1214206969" />
-      <Label layoutX="68.0" layoutY="309.0" text="Order: Cheese Pizza, Chicken, Thin Crust" />
-      <Button layoutX="67.0" layoutY="348.0" onAction="#newToReadyList" mnemonicParsing="false" text="Confirm" />
-      <Button layoutX="230.0" layoutY="348.0" onAction="#newToRejectedList" mnemonicParsing="false" text="Reject" />
-      <Button layoutX="385.0" layoutY="348.0" onAction="#finishedListPickedUp" mnemonicParsing="false" text="Confirm Picked-Up" />
+      <Button layoutX="67.0" layoutY="348.0" mnemonicParsing="false" onAction="#newToReadyList" text="Confirm" />
+      <Button layoutX="230.0" layoutY="348.0" mnemonicParsing="false" onAction="#newToRejectedList" text="Reject" />
+      <Button layoutX="385.0" layoutY="348.0" mnemonicParsing="false" onAction="#finishedListPickedUp" text="Confirm Picked-Up" />
       <Button layoutX="540.0" layoutY="1.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Log Out" />
 
 
-      <CheckBox fx:id="boxFinished" onAction="#addIDListFinished" layoutX="327.0" layoutY="97.0" mnemonicParsing="false" wrapText="true">
+      <CheckBox fx:id="boxFinished" layoutX="327.0" layoutY="97.0" mnemonicParsing="false" onAction="#addIDListFinished" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
@@ -68,5 +38,15 @@
       <Label layoutX="357.0" layoutY="99.0" text="Name: Justin Jin" />
       <Label fx:id="idFinished" layoutX="357.0" layoutY="119.0" text="ID#: 500" />
       <Label layoutX="357.0" layoutY="137.0" prefWidth="212.0" text="Order: Cheese Pizza, Chicken, Thin Crust" />
+      <ScrollPane fx:id="AgentNewOrdersScroll" layoutX="26.0" layoutY="85.0" prefHeight="251.0" prefWidth="278.0">
+         <content>
+            <VBox fx:id="AgentNewOrdersVB" prefHeight="241.0" prefWidth="278.0" />
+         </content>
+      </ScrollPane>
+      <ScrollPane fx:id="AgentFinishedOrdersScroll" layoutX="317.0" layoutY="85.0" prefHeight="251.0" prefWidth="261.0">
+         <content>
+            <VBox fx:id="AgentFinishedOrdersVB" prefHeight="241.0" prefWidth="278.0" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

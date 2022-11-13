@@ -23,6 +23,9 @@ public class AgentScreenController extends SceneController {
     @FXML
     private Label idFinished;
 
+    @FXML
+    private ScrollPane AgentNewOrdersScroll;
+
     private ArrayList<Integer> idListNew = new ArrayList<Integer>();
     private ArrayList<Integer> idListFinished = new ArrayList<Integer>();
 
@@ -43,6 +46,9 @@ public class AgentScreenController extends SceneController {
 
     }
 
+    public void createCheckBoxes(ActionEvent event){
+
+    }
     public void addIDListFinished(ActionEvent event){
         //call upon finishedOrder checkboxes actions
         String[] idArr;

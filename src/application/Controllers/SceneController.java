@@ -72,7 +72,6 @@ public class SceneController {
 			cb.setWrapText(true);
 			cb.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 			VB.getChildren().add(cb);
-
 		}
 
 	}

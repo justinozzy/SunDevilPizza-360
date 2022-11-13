@@ -29,8 +29,9 @@ public class OrderPizzaController extends SceneController {
 
     //Controller for the Confirm Order button
     @FXML
-    public void handleConfirmation(ActionEvent event) throws IOException {
+    public void handleConfirmation(ActionEvent event, String list) throws IOException {
         //Create a new order and switch to the main menu
+        PizzaLists.getList(list);
         switchToMainMenu(event);
         OrderPizzaController.createNewOrder(temp);
         ConfirmButton.setDisable(true);

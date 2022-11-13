@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import application.NodeData;
+import javafx.scene.control.ScrollPane;
 
 public class AgentScreenController extends SceneController {
     @FXML
@@ -21,6 +22,9 @@ public class AgentScreenController extends SceneController {
     private CheckBox boxFinished;
     @FXML
     private Label idFinished;
+
+    @FXML
+    private ScrollPane AgentNewOrdersScroll;
 
     private ArrayList<Integer> idListNew = new ArrayList<Integer>();
     private ArrayList<Integer> idListFinished = new ArrayList<Integer>();
@@ -41,6 +45,9 @@ public class AgentScreenController extends SceneController {
 
     }
 
+    public void createCheckBoxes(ActionEvent event){
+
+    }
     public void addIDListFinished(ActionEvent event){
         //call upon finishedOrder checkboxes actions
         String[] idArr;

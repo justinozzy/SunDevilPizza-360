@@ -110,7 +110,7 @@ public class SceneController {
 		 stage.setScene(scene);
 		 stage.show();
 	 }
-	 public void switchToWorkerScreen(ActionEvent event) throws IOException {
+	 public int switchToWorkerScreen(ActionEvent event) throws IOException {
 		 //Verify the login information
 		 try {
 			 //Check if a worker is an Agent
@@ -120,6 +120,7 @@ public class SceneController {
 				 scene = new Scene(root);
 				 stage.setScene(scene);
 				 stage.show();
+				 return 1;
 			 }
 			 //Check if a worker is a chef
 			 else if (PizzaDatabase.getEmployee(WorkerID.getText(), WorkerPassword.getText()) == 2) {
@@ -128,15 +129,18 @@ public class SceneController {
 				 scene = new Scene(root);
 				 stage.setScene(scene);
 				 stage.show();
+				 return 2;
 			 }
 			 //Credentials are invalid
 			 else {
 				 ValidWorkerID.setText("Invalid ID");
+				 return 0;
 			 }
 		 }
 		 //Empty text fields
 		 catch (NullPointerException e) {
 			 System.err.println(e.getMessage());
 		 }
+		 return 0;
 	 }
 }

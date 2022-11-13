@@ -47,8 +47,8 @@
          </toggleGroup></RadioButton>
       <RadioButton layoutX="292.0" layoutY="170.0" mnemonicParsing="false" text="Thin Crust" toggleGroup="$BaseType" />
       <RadioButton layoutX="292.0" layoutY="200.0" mnemonicParsing="false" text="Pan" toggleGroup="$BaseType" />
-      <TextArea layoutX="394.0" layoutY="109.0" prefHeight="87.0" prefWidth="200.0" promptText="Total:" />
-      <Button layoutX="395.0" layoutY="196.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Calculate Total" />
+      <TextArea fx:id="TotalTextArea" layoutX="394.0" layoutY="109.0" prefHeight="87.0" prefWidth="200.0" promptText="Total:" />
+      <Button fx:id="CalculateTotalButton" layoutX="395.0" layoutY="196.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Calculate Total" />
       <Button layoutX="395.0" layoutY="288.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Return to Home" />
       <Button layoutX="116.0" layoutY="288.0" mnemonicParsing="false" onAction="#handleOrderInformation" text="Review Order" />
    </children>

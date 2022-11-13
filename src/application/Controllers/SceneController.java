@@ -23,7 +23,7 @@ import javafx.scene.Node;
 import application.NodeData;
 
 public class SceneController {
-	 private Stage stage;
+	private Stage stage;
 	 private Scene scene;
 	 private Parent root;
 

@@ -13,6 +13,7 @@ public class NodeData {
     // [0] = chicken, [1] = jalapenos, [2] = Onions
     private String[] toppings = {"","",""};
     private String bake = "";
+    private int totalCost = 0;
 
     //Node Constructor, data shouldn't be modified -> no setters
 
@@ -63,6 +64,10 @@ public class NodeData {
 
     public String[] getToppings() {
         return toppings;
+    }
+
+    public void setTotalCost(Integer total) {
+        this.totalCost = total;
     }
 
     //LinkList toString returns id of Node

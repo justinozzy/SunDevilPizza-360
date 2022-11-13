@@ -2,6 +2,9 @@ package application.Controllers;
 
 import java.io.IOException;
 import java.sql.SQLOutput;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import application.PizzaDatabase;
 import application.PizzaLists;
@@ -11,8 +14,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import application.NodeData;
@@ -34,9 +40,45 @@ public class SceneController {
 	 @FXML
 	 private Label ValidWorkerPassword;
 
-	 //when student logs in, store their ID, default -1 (Not logged in), used by CheckOrders function in MainMenuController
+	 @FXML
+	 public VBox AgentNewOrdersVB;
+
+	@FXML
+	 public VBox AgentFinishedOrdersVB;
+	@FXML
+	public VBox ChefReadyToCookVB;
+
+	@FXML
+	public VBox ChefCookingVB;
+
+	@FXML
+	public VBox ChefReadyForPickupVB;
+
+
+
+	//when student logs in, store their ID, default -1 (Not logged in), used by CheckOrders function in MainMenuController
 	 public static int currStudentID = -1;
-	 
+//if there is a waya we can wait for a controller or handler ot finish runnign and hten do some action, then we can skip the initialization
+	public void createCheckBox(LinkedList<NodeData> list, VBox VB)  {
+		VB.setSpacing(5);
+
+		for(Iterator<NodeData> iterator = list.iterator(); iterator.hasNext();){
+			NodeData curr = iterator.next();
+
+			String topping = Arrays.toString(curr.getToppings());
+			topping = topping.replaceAll("[\\[\\]]","");
+			topping = topping.replaceAll("[,]", " ");
+			String info = "Name: " + curr.getName() + "\n" + "Id: " + curr.getId() + "\n" +  "Order: " + curr.getBase() + " " +  curr.getBake() + " " +  topping;
+
+			CheckBox cb = new CheckBox(info);
+			cb.setWrapText(true);
+			cb.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+			VB.getChildren().add(cb);
+
+		}
+
+	}
+
 	 public void switchToMainMenu(ActionEvent event) throws IOException {
 		 root = FXMLLoader.load(getClass().getResource("../Panes/MainMenu.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -110,33 +152,43 @@ public class SceneController {
 		 stage.setScene(scene);
 		 stage.show();
 	 }
-	 public void switchToWorkerScreen(ActionEvent event) throws IOException {
+
+	 public int switchToWorkerScreen(ActionEvent event) throws IOException {
 		 //Verify the login information
 		 try {
 			 //Check if a worker is an Agent
 			 if (PizzaDatabase.getEmployee(WorkerID.getText(), WorkerPassword.getText()) == 1) {
 				 root = FXMLLoader.load(getClass().getResource("../Panes/AgentScreen.fxml"));
 				 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				 //Our VBox doesnt exist and we want to load it. But how?
 				 scene = new Scene(root);
+				 String css = this.getClass().getResource("../Panes/application.css").toExternalForm();
+				 scene.getStylesheets().add(css);
 				 stage.setScene(scene);
 				 stage.show();
+				 return 1;
 			 }
 			 //Check if a worker is a chef
 			 else if (PizzaDatabase.getEmployee(WorkerID.getText(), WorkerPassword.getText()) == 2) {
 				 root = FXMLLoader.load(getClass().getResource("../Panes/ChefScreen.fxml"));
 				 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				 scene = new Scene(root);
+				 String css = this.getClass().getResource("../Panes/application.css").toExternalForm();
+				 scene.getStylesheets().add(css);
 				 stage.setScene(scene);
 				 stage.show();
+				 return 2;
 			 }
 			 //Credentials are invalid
 			 else {
 				 ValidWorkerID.setText("Invalid ID");
+				 return 0;
 			 }
 		 }
 		 //Empty text fields
 		 catch (NullPointerException e) {
 			 System.err.println(e.getMessage());
 		 }
+		 return 0;
 	 }
 }

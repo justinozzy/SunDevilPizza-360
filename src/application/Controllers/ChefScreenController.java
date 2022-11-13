@@ -4,12 +4,13 @@ import application.PizzaLists;
 import application.Status;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import java.util.*;
+
+import javafx.scene.control.ScrollPane;
 
 public class ChefScreenController extends SceneController {
     @FXML
@@ -20,8 +21,44 @@ public class ChefScreenController extends SceneController {
     private CheckBox boxPickup;
     @FXML
     private Label idPickup;
+    @FXML
+    private Button ChefGetOrdersButton;
+
     private ArrayList<Integer> idListReady = new ArrayList<Integer>();
     private ArrayList<Integer> idListPickup = new ArrayList<Integer>();
+
+    private LinkedList<NodeData> ChefReady = new LinkedList<NodeData>();
+    private LinkedList<NodeData> ChefCooking = new LinkedList<NodeData>();
+    private LinkedList<NodeData> ChefPickup = new LinkedList<NodeData>();
+
+    public void ChefGetInfo(){
+        ChefGetOrdersButton.setDisable(true);
+        //Ready to Cook
+        NodeData data = new NodeData();
+        String[] topTest = {"Chicken", "", ""};
+        data.updateNode("Ready", 43, Status.NEW, "Cheese", topTest , "Pan");
+        ChefReady.add(data);
+        //testing if we can do it x2
+        NodeData data2 = new NodeData();
+        String[] topTest2 = {"Mushroom", "", ""};
+        data2.updateNode("e", 69, Status.NEW, "Cheese", topTest2 , "Pan");
+        ChefReady.add(data2);
+        createCheckBox(ChefReady, ChefReadyToCookVB);
+
+        //Cooking
+        NodeData d = new NodeData();
+        String[] t = {"Chicken", "", ""};
+        d.updateNode("Cooking", 70, Status.NEW, "Cheese", t , "Pan");
+        ChefCooking.add(d);
+        createCheckBox(ChefCooking, ChefCookingVB);
+
+        //Ready for Pickup
+        NodeData node = new NodeData();
+        String[] topp = {"Chicken", "", ""};
+        node.updateNode("Pickup", 70, Status.NEW, "Cheese", topp , "Pan");
+        ChefPickup.add(node);
+        createCheckBox(ChefPickup, ChefReadyForPickupVB);
+    }
 
     public void addIDListReady(ActionEvent event) {
         //Call upon readyOrder checkboxes actions

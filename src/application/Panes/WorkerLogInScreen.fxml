@@ -15,7 +15,7 @@
       </Label>
       <TextField fx:id="WorkerID" layoutX="103.0" layoutY="158.0" />
       <TextField fx:id="WorkerPassword" layoutX="104.0" layoutY="222.0" />
-      <Button fx:id="WorkerLogInButton" layoutX="127.0" layoutY="308.0" mnemonicParsing="false" onAction="#switchToWorkerScreen" text="Login" />
+      <Button fx:id="WorkerLogInButton" layoutX="127.0" layoutY="308.0" mnemonicParsing="false" onAction="#checkAgentMenu" text="Login" />
       <Button layoutX="355.0" layoutY="308.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Return to Main Menu" />
       <Label layoutX="27.0" layoutY="161.0" text="WORKER ID">
          <font>

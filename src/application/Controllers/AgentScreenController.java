@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import application.NodeData;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
 
 public class AgentScreenController extends SceneController {
     @FXML
@@ -28,6 +29,9 @@ public class AgentScreenController extends SceneController {
 
     private ArrayList<Integer> idListNew = new ArrayList<Integer>();
     private ArrayList<Integer> idListFinished = new ArrayList<Integer>();
+
+
+
 
     public void addIDListNew(ActionEvent event){
         //Call upon newOrder checkboxes actions

@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -40,7 +41,17 @@ public class SceneController {
 
 	 //when student logs in, store their ID, default -1 (Not logged in), used by CheckOrders function in MainMenuController
 	 public static int currStudentID = -1;
-	 
+
+	public void createCheckBox(String list)  {
+		CheckBox checkBox[] = new CheckBox[3];
+		VBox vb = new VBox();
+		for(int n = 0; n < 3; n++) {
+			checkBox[n] = new CheckBox();
+			vb.getChildren().add(checkBox[n]);
+			vb.setSpacing(5);
+		}
+	}
+
 	 public void switchToMainMenu(ActionEvent event) throws IOException {
 		 root = FXMLLoader.load(getClass().getResource("../Panes/MainMenu.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();

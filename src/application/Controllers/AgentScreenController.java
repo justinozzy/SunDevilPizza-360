@@ -25,6 +25,8 @@ public class AgentScreenController extends SceneController {
     private Label idFinished;
     @FXML
     private Button AgentGetOrdersButton;
+    @FXML
+    private ScrollPane AgentNewOrdersScroll;
 
     private ArrayList<Integer> idListNew = new ArrayList<Integer>();
     private ArrayList<Integer> idListFinished = new ArrayList<Integer>();

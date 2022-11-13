@@ -4,6 +4,7 @@ import application.PizzaLists;
 import application.Status;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
@@ -20,13 +21,18 @@ public class ChefScreenController extends SceneController {
     private CheckBox boxPickup;
     @FXML
     private Label idPickup;
+    @FXML
+    private Button ChefGetOrdersButton;
+
     private ArrayList<Integer> idListReady = new ArrayList<Integer>();
     private ArrayList<Integer> idListPickup = new ArrayList<Integer>();
 
     private LinkedList<NodeData> ChefReady = new LinkedList<NodeData>();
     private LinkedList<NodeData> ChefCooking = new LinkedList<NodeData>();
     private LinkedList<NodeData> ChefPickup = new LinkedList<NodeData>();
+
     public void ChefGetInfo(){
+        ChefGetOrdersButton.setDisable(true);
         //Ready to Cook
         NodeData data = new NodeData();
         String[] topTest = {"Chicken", "", ""};
@@ -53,6 +59,7 @@ public class ChefScreenController extends SceneController {
         ChefPickup.add(node);
         createCheckBox(ChefPickup, ChefReadyForPickupVB);
     }
+
     public void addIDListReady(ActionEvent event) {
         //Call upon readyOrder checkboxes actions
         String[] idArr;

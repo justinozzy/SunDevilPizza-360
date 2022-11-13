@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -70,6 +71,8 @@ public class SceneController {
 			String info = "Name: " + curr.getName() + "\n" + "Id: " + curr.getId() + "\n" +  "Order: " + curr.getBase() + " " +  curr.getBake() + " " +  topping;
 
 			CheckBox cb = new CheckBox(info);
+			cb.setWrapText(true);
+			cb.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 			VB.getChildren().add(cb);
 
 		}

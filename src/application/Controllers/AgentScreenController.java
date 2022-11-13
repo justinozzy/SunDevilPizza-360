@@ -21,7 +21,6 @@ public class AgentScreenController extends SceneController {
 
     public void newToReadyList(){
         //Call upon newOrder confirm button
-        int count = 0;
         //Iterate through the newList
         for (Iterator<NodeData> iterator = PizzaLists.getList("newList").iterator(); iterator.hasNext();) {
             NodeData curr = iterator.next();
@@ -30,14 +29,21 @@ public class AgentScreenController extends SceneController {
                 if (curr.getId() == IdLists.getIdLists("AgentnewList").get(j)[0]); {
                     curr.setStatus(Status.READY);
                     PizzaLists.getList("readyList").add(curr);
-                    iterator.remove();
                     //Remove checked boxes from the pane
-                    int cbId = IdLists.getIdLists("AgentnewList").get(count)[1];
-                    AgentNewOrdersVB.getChildren().remove(cbId);
+                    int[] cbId = new int[1];
+                    cbId[0] = (IdLists.getIdLists("AgentnewList").get(j)[1]);
+                    IdLists.getIdLists("AgentnewList").remove(j);
+
+                    for (int i = 0; i < AgentNewOrdersVB.getChildren().size(); i++) {
+                        if (Integer.toString(cbId[0]).equals(AgentNewOrdersVB.getChildren().get(i).getId())) {
+                            AgentNewOrdersVB.getChildren().remove(i);
+                        }
+                    }
+                    iterator.remove();
+                    System.out.println(curr);
+                    break;
                 }
-                System.out.println(curr);
             }
-            count++;
         }
         System.out.println("NEWLIST: " + PizzaLists.getList("newList").toString() + " **Removed from");
         System.out.println("READYLIST: " + PizzaLists.getList("readyList").toString() + "**Added to");

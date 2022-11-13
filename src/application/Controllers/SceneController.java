@@ -63,7 +63,6 @@ public class SceneController {
 //if there is a waya we can wait for a controller or handler ot finish runnign and hten do some action, then we can skip the initialization
 	public void createCheckBox(LinkedList<NodeData> list, VBox VB)  {
 		ArrayList<Integer> idList = new ArrayList<>();
-		int[] cbInfo = new int[2];
 		int count = 0;
 		VB.setSpacing(5);
 
@@ -71,6 +70,7 @@ public class SceneController {
 		for (Iterator<NodeData> iterator = list.iterator(); iterator.hasNext();){
 			StringBuilder toppings = new StringBuilder();
 			NodeData curr = iterator.next();
+			int[] cbInfo = new int[2];
 
 			//Check which toppings were selected
 			for (int i = 0; i < 3; i++) {

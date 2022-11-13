@@ -1,4 +1,5 @@
 package application.Controllers;
+import application.IdLists;
 import application.NodeData;
 import application.PizzaLists;
 import application.Status;
@@ -11,21 +12,13 @@ import javafx.scene.control.Label;
 import java.util.*;
 
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Region;
 
 public class ChefScreenController extends SceneController {
     @FXML
-    private CheckBox boxReady;
-    @FXML
-    private Label idReady;
-    @FXML
-    private CheckBox boxPickup;
-    @FXML
-    private Label idPickup;
-    @FXML
     private Button ChefGetOrdersButton;
+    private static Integer newId;
 
-    private ArrayList<Integer> idListReady = new ArrayList<Integer>();
-    private ArrayList<Integer> idListPickup = new ArrayList<Integer>();
 
     private LinkedList<NodeData> ChefReady = new LinkedList<NodeData>();
     private LinkedList<NodeData> ChefCooking = new LinkedList<NodeData>();
@@ -33,96 +26,94 @@ public class ChefScreenController extends SceneController {
 
     public void ChefGetInfo(){
         ChefGetOrdersButton.setDisable(true);
-        //Ready to Cook
-        NodeData data = new NodeData();
-        String[] topTest = {"Chicken", "", ""};
-        data.updateNode("Ready", 43, Status.NEW, "Cheese", topTest , "Pan");
-        ChefReady.add(data);
-        //testing if we can do it x2
-        NodeData data2 = new NodeData();
-        String[] topTest2 = {"Mushroom", "", ""};
-        data2.updateNode("e", 69, Status.NEW, "Cheese", topTest2 , "Pan");
-        ChefReady.add(data2);
-        createCheckBox(ChefReady, ChefReadyToCookVB);
+        //Ready Orders
+        createCheckBox(PizzaLists.getList("readyList"), ChefReadyToCookVB);
 
-        //Cooking
-        NodeData d = new NodeData();
-        String[] t = {"Chicken", "", ""};
-        d.updateNode("Cooking", 70, Status.NEW, "Cheese", t , "Pan");
-        ChefCooking.add(d);
-        createCheckBox(ChefCooking, ChefCookingVB);
+        //Cooking Orders
+        createCheckBox(PizzaLists.getList("cookingList"), ChefCookingVB);
 
-        //Ready for Pickup
-        NodeData node = new NodeData();
-        String[] topp = {"Chicken", "", ""};
-        node.updateNode("Pickup", 70, Status.NEW, "Cheese", topp , "Pan");
-        ChefPickup.add(node);
-        createCheckBox(ChefPickup, ChefReadyForPickupVB);
+        //Pickup Orders
+        createCheckBox(PizzaLists.getList("pickupList"), ChefReadyForPickupVB);
     }
 
-    public void addIDListReady(ActionEvent event) {
-        //Call upon readyOrder checkboxes actions
-        String[] idArr;
-        int userId = 0;
-
-        if (boxReady.isSelected()) {
-            idArr = idReady.getText().split("\\s+");
-            userId = Integer.parseInt(idArr[1]);
-            idListReady.add(userId);
-            System.out.println("IDList=" + idListReady.toString());
-        } else {
-            idListReady.remove(userId);
-            System.out.println("IDList=" + idListReady.toString());
-        }
+    public void ChefGetInfoUpdate(){
+        ChefReadyToCookVB.getChildren().removeAll();
+        ChefReadyForPickupVB.getChildren().removeAll();
+        ChefGetInfo();
     }
 
-    public void addIDListPickup(ActionEvent event) {
-        //Call upon pickupOrder checkboxes actions
-        String[] idArr;
-        int userId = 0;
+    public static void setStudentId(Integer id) {
+        newId = id;
+    }
 
-        if (boxPickup.isSelected()) {
-            idArr = idPickup.getText().split("\\s+");
-            userId = Integer.parseInt(idArr[1]);
-            idListPickup.add(userId);
-            System.out.println("IDList=" + idListPickup.toString());
-        } else {
-            idListPickup.remove(userId);
-            System.out.println("IDList=" + idListPickup.toString());
+    public void createCookingText(){
+        //Get all the nodes and iterate through them
+        for (Iterator<NodeData> iterator = PizzaLists.getList("cookingList").iterator(); iterator.hasNext();) {
+            Label orderLabels;
+            Label statusLabels;
+            NodeData curr = iterator.next();
+            StringBuilder toppings = new StringBuilder();
+
+            //Build toppings string with selected toppings
+            for (int i = 0; i < 3; i++) {
+                if (curr.getToppings()[i] != null) {
+                    toppings.append(String.format(" %s", curr.getToppings()[i]));
+                }
+            }
+
+            //Determine if the ID of the student matches this node and print it to the string if it does
+            if (curr.getId() == newId) {
+                orderLabels = new Label(String.format("%s %s pizza with%s\n", curr.getBake(), curr.getBase(),
+                        toppings));
+                orderLabels.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+                statusLabels = new Label(curr.getStatus().toString());
+                OrdersVBox.getChildren().add(orderLabels);
+                StatusVBox.getChildren().add(statusLabels);
+            }
         }
     }
 
     public void readyToCookingList(){
         //Call upon readyOrder confirmCooking button
+        int count = 0;
         for (Iterator<NodeData> iterator = PizzaLists.getList("readyList").iterator(); iterator.hasNext();) {
             NodeData curr = iterator.next();
-            for (int j = 0; j < idListReady.size(); j++){
-                if (curr.getId() == idListReady.get(j)); {
+            for (int j = 0; j < IdLists.getIdLists("AgentreadyList").size(); j++){
+                if (curr.getId() == IdLists.getIdLists("AgentreadyList").get(j)[0]); {
                     curr.setStatus(Status.COOKING);
                     PizzaLists.getList("cookingList").add(curr);
                     // set a cooking timer of 15s whenever a Node is added to Cooking List
                     startCookTimer(curr);       //Timer Method below
                     System.out.println("Timer set:ID= " + curr.getId());
                     iterator.remove();
+                    //Remove check boxes from ReadyToCook Box
+                    int cbId = IdLists.getIdLists("AgentreadyList").get(count)[1];
+                    ChefReadyToCookVB.getChildren().remove(cbId);
                 }
             }
+            count++;
         }
+        ChefGetInfo();
         System.out.println("COOKINGLIST: " + PizzaLists.getList("cookingList").toString() + " **Added to");
         System.out.println("READYLIST: " + PizzaLists.getList("readyList").toString() + " **Removed from");
     }
 
     public void pickupToFinishedList(){
         //Call upon pickupOrder confirmPickup button
+        int count = 0;
         for (Iterator<NodeData> iterator = PizzaLists.getList("pickupList").iterator(); iterator.hasNext();) {
             NodeData curr = iterator.next();
-            for (int j = 0; j < idListPickup.size(); j++){
-                if (curr.getId() == idListPickup.get(j)); {
+            for (int j = 0; j < IdLists.getIdLists("AgentpickupList").size(); j++){
+                if (curr.getId() == IdLists.getIdLists("AgentpickupList").get(j)[0]); {
                     curr.setStatus(Status.FINISHED);
                     PizzaLists.getList("finishedList").add(curr);
                     iterator.remove();
+                    //Remove checked boxes from ReadyToPickup box
+                    int cbId = IdLists.getIdLists("AgentpickupList").get(count)[1];
+                    ChefReadyForPickupVB.getChildren().remove(cbId);
                 }
             }
-            System.out.println(curr.getName());
+            count++;
         }
         System.out.println("PICKUPLIST: " + PizzaLists.getList("pickupList").toString() + " **Added to");
         System.out.println("FINISHEDLIST: " + PizzaLists.getList("finishedList").toString() + " **Removed from");
@@ -157,6 +148,7 @@ public class ChefScreenController extends SceneController {
                     curr.setStatus(Status.PICKUP);
                     PizzaLists.getList("pickupList").add(curr);
                     iterator.remove();
+                    ChefGetInfoUpdate();
                 }
                 System.out.println("COOKING DONE: " + curr.getId());
                 System.out.println("PICKUPLIST: " + PizzaLists.getList("pickupList").toString() + " **Added to");
@@ -168,3 +160,32 @@ public class ChefScreenController extends SceneController {
 
 }
 
+/*
+//Call upon newOrder confirm button
+        //Iterate through the newList
+        for (Iterator<NodeData> iterator = PizzaLists.getList("newList").iterator(); iterator.hasNext();) {
+            NodeData curr = iterator.next();
+            for (int j = 0; j < IdLists.getIdLists("AgentnewList").size(); j++){
+                //Check if the ids in AgentNewlist and newList match and add them to the readyList
+                if (curr.getId() == IdLists.getIdLists("AgentnewList").get(j)[0]); {
+                    curr.setStatus(Status.READY);
+                    PizzaLists.getList("readyList").add(curr);
+                    //Remove checked boxes from the pane
+                    int[] cbId = new int[1];
+                    cbId[0] = (IdLists.getIdLists("AgentnewList").get(j)[1]);
+                    IdLists.getIdLists("AgentnewList").remove(j);
+
+                    for (int i = 0; i < AgentNewOrdersVB.getChildren().size(); i++) {
+                        if (Integer.toString(cbId[0]).equals(AgentNewOrdersVB.getChildren().get(i).getId())) {
+                            AgentNewOrdersVB.getChildren().remove(i);
+                        }
+                    }
+                    iterator.remove();
+                    System.out.println(curr);
+                    break;
+                }
+            }
+        }
+        System.out.println("NEWLIST: " + PizzaLists.getList("newList").toString() + " **Removed from");
+        System.out.println("READYLIST: " + PizzaLists.getList("readyList").toString() + "**Added to");
+ */

@@ -118,6 +118,49 @@ public class PizzaDatabase {
         return returnValue;
     }
 
+    //Used to connect to the Pizza Database and gather the requested information
+    public static void changeStudentBalance(Integer id, Integer balance) {
+        //Declare variables
+        Connection conn = null;
+        Statement statement;
+        String[] data = new String[3];
+
+        //Connect to students database
+        try {
+            //Create the database connection
+            conn = DriverManager.getConnection(db_students);
+            statement = conn.createStatement();
+            statement.setQueryTimeout(15);
+            System.out.println("Student pizza database connected!");
+
+            //Select query for getting the user with specified ID
+            ResultSet rs = statement.executeQuery(String.format("SELECT * FROM users WHERE id=%d", id));
+
+            //Set user information
+            data[0] = String.valueOf(rs.getInt("id"));
+            data[1] = rs.getString("name");
+            data[2] = String.valueOf(rs.getInt("balance"));
+
+            //Update balance
+            statement.executeUpdate(String.format("UPDATE users SET balance=%d WHERE id=%d", (Integer.parseInt(data[2]) - balance), id));
+        }
+        //Most likely database isn't found so throw an error
+        catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            //Close the database connection
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            }
+            //Failure to close connection
+            catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+    }
+
     //Used to create the databases
     public static void createDatabases() {
         //Declare variables

@@ -2,21 +2,24 @@ package application.Controllers;
 
 import java.io.IOException;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import application.IdLists;
 import application.PizzaDatabase;
 import application.PizzaLists;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -24,11 +27,10 @@ import javafx.scene.Node;
 import application.NodeData;
 
 public class SceneController {
-	 NodeData temp = new NodeData();
-	 private Stage stage;
+	private Stage stage;
 	 private Scene scene;
 	 private Parent root;
-	 
+
 	 @FXML
 	 private TextField WorkerID;
 	 @FXML
@@ -60,23 +62,54 @@ public class SceneController {
 	 public static int currStudentID = -1;
 //if there is a waya we can wait for a controller or handler ot finish runnign and hten do some action, then we can skip the initialization
 	public void createCheckBox(LinkedList<NodeData> list, VBox VB)  {
+		ArrayList<Integer> idList = new ArrayList<>();
+		int count = 0;
 		VB.setSpacing(5);
 
-		for(Iterator<NodeData> iterator = list.iterator(); iterator.hasNext();){
+		//Iterate through the linked list that is called
+		for (Iterator<NodeData> iterator = list.iterator(); iterator.hasNext();){
+			StringBuilder toppings = new StringBuilder();
 			NodeData curr = iterator.next();
+			int[] cbInfo = new int[2];
 
-			String topping = Arrays.toString(curr.getToppings());
-			topping = topping.replaceAll("[\\[\\]]","");
-			topping = topping.replaceAll("[,]", " ");
-			String info = "Name: " + curr.getName() + "\n" + "Id: " + curr.getId() + "\n" +  "Order: " + curr.getBase() + " " +  curr.getBake() + " " +  topping;
+			//Check which toppings were selected
+			for (int i = 0; i < 3; i++) {
+				if (curr.getToppings()[i] != null) {
+					toppings.append(String.format(" %s", curr.getToppings()[i]));
+				}
+			}
+			//Add id to the list of ids that will be checked
+			idList.add(curr.getId());
+			String info = "Name: " + curr.getName() + "\n" + "Id: " + curr.getId() + "\n" +  "Order: " + curr.getBase() + " " +  curr.getBake() + toppings;
 
+			//Create checkboxes
 			CheckBox cb = new CheckBox(info);
+			cb.setId(Integer.toString(count));
 			cb.setWrapText(true);
 			cb.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+
+			//Create array of objects needed to determine which checkboxes are selected later on (BAD CODE!!!)
+			cbInfo[0] = curr.getId();
+			cbInfo[1] = count;
+			String agentList = String.format("Agent%s", PizzaLists.getName(list));
+
+			//Add event handlers for when a checkbox is selected
+			EventHandler<ActionEvent> event = e -> {
+				if (cb.isSelected()) {
+					System.out.println(agentList);
+					IdLists.getIdLists(agentList).add(cbInfo);
+				}
+				else {
+					IdLists.getIdLists(agentList).remove(cbInfo);
+				}
+				System.out.println("Selected Orders: " + IdLists.getIdLists(agentList).toString());
+			};
+
+			//Add checkboxes to the VBox
+			cb.setOnAction(event);
 			VB.getChildren().add(cb);
-
+			count++;
 		}
-
 	}
 
 	 public void switchToMainMenu(ActionEvent event) throws IOException {

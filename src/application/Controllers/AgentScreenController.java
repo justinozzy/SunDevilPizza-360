@@ -1,4 +1,5 @@
 package application.Controllers;
+import application.IdLists;
 import application.PizzaLists;
 import application.Status;
 import javafx.event.ActionEvent;
@@ -16,131 +17,110 @@ import javafx.scene.control.ScrollPane;
 
 public class AgentScreenController extends SceneController {
     @FXML
-    private CheckBox boxNew;
-    @FXML
-    private Label idNew;
-    @FXML
-    private CheckBox boxFinished;
-    @FXML
-    private Label idFinished;
-    @FXML
     private Button AgentGetOrdersButton;
-    @FXML
-    private ScrollPane AgentNewOrdersScroll;
-
-    private ArrayList<Integer> idListNew = new ArrayList<Integer>();
-    private ArrayList<Integer> idListFinished = new ArrayList<Integer>();
-
-    private LinkedList<NodeData> test = new LinkedList<NodeData>();
-    private LinkedList<NodeData> finishedTest = new LinkedList<NodeData>();
-
-
-    public void addIDListNew(ActionEvent event){
-        //Call upon newOrder checkboxes actions
-        String[] idArr;
-        int userId = 0;
-
-        if(boxNew.isSelected()){
-            idArr = idNew.getText().split("\\s+");
-            userId = Integer.parseInt(idArr[1]);
-            idListNew.add(userId);
-        }
-        else{
-            idListNew.remove(userId);
-        }
-    }
-
-    public void addIDListFinished(ActionEvent event){
-        //call upon finishedOrder checkboxes actions
-        String[] idArr;
-        int userId = 0;
-
-        if(boxFinished.isSelected()){
-            idArr = idFinished.getText().split("\\s+");
-            userId = Integer.parseInt(idArr[1]);
-            idListFinished.add(userId);
-        }
-        else{
-            idListFinished.remove(userId);
-        }
-    }
 
     public void newToReadyList(){
         //Call upon newOrder confirm button
+        //Iterate through the newList
         for (Iterator<NodeData> iterator = PizzaLists.getList("newList").iterator(); iterator.hasNext();) {
             NodeData curr = iterator.next();
-            for (int j = 0; j < idListNew.size(); j++){
-                if (curr.getId() == idListNew.get(j)); {
+            for (int j = 0; j < IdLists.getIdLists("AgentnewList").size(); j++){
+                //Check if the ids in AgentNewlist and newList match and add them to the readyList
+                if (curr.getId() == IdLists.getIdLists("AgentnewList").get(j)[0]); {
                     curr.setStatus(Status.READY);
                     PizzaLists.getList("readyList").add(curr);
+                    //Remove checked boxes from the pane
+                    int[] cbId = new int[1];
+                    cbId[0] = (IdLists.getIdLists("AgentnewList").get(j)[1]);
+                    IdLists.getIdLists("AgentnewList").remove(j);
+
+                    for (int i = 0; i < AgentNewOrdersVB.getChildren().size(); i++) {
+                        if (Integer.toString(cbId[0]).equals(AgentNewOrdersVB.getChildren().get(i).getId())) {
+                            AgentNewOrdersVB.getChildren().remove(i);
+                        }
+                    }
                     iterator.remove();
+                    System.out.println(curr);
+                    break;
                 }
             }
-            System.out.println(curr.toString());
         }
-        System.out.println("READYLIST: " + PizzaLists.getList("readyList").toString() + "**Added to");
         System.out.println("NEWLIST: " + PizzaLists.getList("newList").toString() + " **Removed from");
+        System.out.println("READYLIST: " + PizzaLists.getList("readyList").toString() + "**Added to");
     }
 
-    public void newToRejectedList(){
+    public void newToRejectedList() {
         //Call upon newOrder reject button
-        for (Iterator<NodeData> iterator = PizzaLists.getList("newList").iterator(); iterator.hasNext();) {
+        //Iterate through the new list
+        for (Iterator<NodeData> iterator = PizzaLists.getList("newList").iterator(); iterator.hasNext(); ) {
             NodeData curr = iterator.next();
-            for (int j = 0; j < idListNew.size(); j++){
-                if (curr.getId() == idListNew.get(j)); {
+            for (int j = 0; j < IdLists.getIdLists("AgentnewList").size(); j++) {
+                //Check if the ids in AgentNewlist and newList match and add them to the readyList
+                if (curr.getId() == IdLists.getIdLists("AgentnewList").get(j)[0]) ;
+                {
                     curr.setStatus(Status.REJECT);
-                    PizzaLists.getList("rejectedList").add(curr);
+                    PizzaLists.getList("readyList").add(curr);
+                    //Remove checked boxes from the pane
+                    int[] cbId = new int[1];
+                    cbId[0] = (IdLists.getIdLists("AgentnewList").get(j)[1]);
+                    IdLists.getIdLists("AgentnewList").remove(j);
+
+                    for (int i = 0; i < AgentNewOrdersVB.getChildren().size(); i++) {
+                        if (Integer.toString(cbId[0]).equals(AgentNewOrdersVB.getChildren().get(i).getId())) {
+                            AgentNewOrdersVB.getChildren().remove(i);
+                        }
+                    }
                     iterator.remove();
+                    System.out.println(curr);
+                    break;
                 }
             }
-            System.out.println(curr.toString());
         }
         System.out.println("REJECTEDLIST: " + PizzaLists.getList("rejectedList").toString() + "**Added to");
         System.out.println("NEWLIST: " + PizzaLists.getList("newList").toString() + "**Removed from");
     }
 
-
-
     public void AgentGetInfo(){
         AgentGetOrdersButton.setDisable(true);
         //New Orders
-        NodeData data = new NodeData();
-        String[] topTest = {"Chicken", "", ""};
-        data.updateNode("test", 43, Status.NEW, "Cheese", topTest , "Pan");
-        test.add(data);
-        //testing if we can do it x2
-        NodeData data2 = new NodeData();
-        String[] topTest2 = {"Mushroom", "", ""};
-        data2.updateNode("e", 69, Status.NEW, "Cheese", topTest2 , "Pan");
-        test.add(data2);
-        createCheckBox(test, AgentNewOrdersVB);
+        createCheckBox(PizzaLists.getList("newList"), AgentNewOrdersVB);
 
         //Finished Orders
-        NodeData d = new NodeData();
-        String[] t = {"Chicken", "", ""};
-        d.updateNode("Finishedtest", 70, Status.NEW, "Cheese", t , "Pan");
-        finishedTest.add(d);
-        createCheckBox(finishedTest, AgentFinishedOrdersVB);
+        createCheckBox(PizzaLists.getList("finishedList"), AgentFinishedOrdersVB);
     }
     public void finishedListPickedUp(){
         //Call upon finishedOrder [Confirmed Picked-Up] button
         //When a finished order is selected and Picked-Up, order completed, remove it from finished list.
-        for (Iterator<NodeData> iterator = PizzaLists.getList("finishedList").iterator(); iterator.hasNext();) {
+        for (Iterator<NodeData> iterator = PizzaLists.getList("finishedList").iterator(); iterator.hasNext(); ) {
             NodeData curr = iterator.next();
-            for (int j = 0; j < idListFinished.size(); j++){
-                if (curr.getId() == idListFinished.get(j)) {
-                    iterator.remove();
-                    // Order completed, also search & remove node from allNodesList
-                    for (Iterator<NodeData> allNodesIterator = PizzaLists.getList("allNodesList").iterator(); iterator.hasNext(); ) {
-                        NodeData currAllNodes = allNodesIterator.next();
-                        if (currAllNodes.getId() == idListFinished.get(j)) {
-                            allNodesIterator.remove();
+            for (int j = 0; j < IdLists.getIdLists("AgentfinishedList").size(); j++) {
+                //Check if the ids in Agentfinishedlist and finishedList match and add them to the readyList
+                if (curr.getId() == IdLists.getIdLists("AgentfinishedList").get(j)[0]) ;
+                {
+                    PizzaLists.getList("readyList").add(curr);
+                    //Remove checked boxes from the pane
+                    int[] cbId = new int[1];
+                    cbId[0] = (IdLists.getIdLists("AgentfinishedList").get(j)[1]);
+                    IdLists.getIdLists("AgentfinishedList").remove(j);
+
+                    for (int i = 0; i < AgentFinishedOrdersVB.getChildren().size(); i++) {
+                        if (Integer.toString(cbId[0]).equals(AgentFinishedOrdersVB.getChildren().get(i).getId())) {
+                            AgentFinishedOrdersVB.getChildren().remove(i);
                         }
                     }
-                }
 
+                    for (Iterator<NodeData> iterator2 = PizzaLists.getList("allNodesList").iterator(); iterator2.hasNext(); ) {
+                        NodeData curr2 = iterator2.next();
+                        if(curr2.equals(curr)){
+                            iterator2.remove();
+                        }
+                    }
+
+                    iterator.remove();
+                    System.out.println(curr);
+                    break;
+                }
             }
-            System.out.println(curr.toString());
         }
         System.out.println("FINISHEDLIST: " + PizzaLists.getList("finishedList").toString());
     }

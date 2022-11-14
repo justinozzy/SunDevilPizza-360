@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Arrays;
+
 public class NodeData {
     //Initialize variables, default empty
     private String name = "";
@@ -11,6 +13,7 @@ public class NodeData {
     // [0] = chicken, [1] = jalapenos, [2] = Onions
     private String[] toppings = {"","",""};
     private String bake = "";
+    private int totalCost = 0;
 
     //Node Constructor, data shouldn't be modified -> no setters
 
@@ -35,6 +38,14 @@ public class NodeData {
         this.status = status;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -55,10 +66,19 @@ public class NodeData {
         return toppings;
     }
 
+    public void setTotalCost(Integer total) {
+        this.totalCost = total;
+    }
+
+    public int getTotalCost() {
+        return totalCost;
+    }
+
     //LinkList toString returns id of Node
     @Override
     public String toString(){
-        return ""+this.id;
+        return String.format("Name: %s\n ID: %d\n Status: %s\n Base: %s\n Bake: %s\n Toppings: %s\n",
+                this.name, this.id, this.status, this.base, this.bake, Arrays.toString(this.toppings));
     }
 
 }

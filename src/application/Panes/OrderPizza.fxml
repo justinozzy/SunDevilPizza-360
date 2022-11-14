@@ -11,7 +11,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.OrderPizzaController">
    <children>
-      <Label text="Logged in as John Smith" />
       <Label layoutX="204.0" layoutY="45.0" text="Sun Devil Pizza">
          <font>
             <Font name="Andalus" size="30.0" />
@@ -38,18 +37,18 @@
          </toggleGroup></RadioButton>
       <RadioButton layoutX="44.0" layoutY="170.0" mnemonicParsing="false" text="Veggie" toggleGroup="$Base" />
       <RadioButton layoutX="44.0" layoutY="200.0" mnemonicParsing="false" text="Meat Lover's" toggleGroup="$Base" />
-      <CheckBox layoutX="183.0" layoutY="140.0" mnemonicParsing="false" text="Chicken" />
-      <CheckBox layoutX="182.0" layoutY="170.0" mnemonicParsing="false" text="Jalepeno" />
-      <CheckBox layoutX="183.0" layoutY="200.0" mnemonicParsing="false" text="Onions" />
-      <RadioButton layoutX="291.0" layoutY="140.0" mnemonicParsing="false" text="Hand Tossed">
+      <CheckBox fx:id="ChickenBox" layoutX="183.0" layoutY="140.0" mnemonicParsing="false" text="Chicken" />
+      <CheckBox fx:id="JalapenoBox" layoutX="182.0" layoutY="170.0" mnemonicParsing="false" text="Jalapeno" />
+      <CheckBox fx:id="OnionBox" layoutX="183.0" layoutY="200.0" mnemonicParsing="false" text="Onions" />
+      <RadioButton layoutX="291.0" layoutY="140.0" mnemonicParsing="false" text="Hand Tossed" toggleGroup="$BaseType">
          <toggleGroup>
             <ToggleGroup fx:id="BaseType" />
          </toggleGroup></RadioButton>
       <RadioButton layoutX="292.0" layoutY="170.0" mnemonicParsing="false" text="Thin Crust" toggleGroup="$BaseType" />
       <RadioButton layoutX="292.0" layoutY="200.0" mnemonicParsing="false" text="Pan" toggleGroup="$BaseType" />
-      <TextArea layoutX="394.0" layoutY="109.0" prefHeight="87.0" prefWidth="200.0" promptText="Total:" />
-      <Button layoutX="395.0" layoutY="196.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Calculate Total" />
+      <TextArea fx:id="TotalTextArea" layoutX="394.0" layoutY="109.0" prefHeight="87.0" prefWidth="200.0" promptText="Total:" />
+      <Button fx:id="CalculateTotalButton" layoutX="395.0" layoutY="196.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Calculate Total" />
       <Button layoutX="395.0" layoutY="288.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Return to Home" />
-      <Button layoutX="116.0" layoutY="288.0" mnemonicParsing="false" onAction="#switchToReviewOrder" text="Review Order" />
+      <Button layoutX="116.0" layoutY="288.0" mnemonicParsing="false" onAction="#handleOrderInformation" text="Review Order" />
    </children>
 </AnchorPane>

@@ -70,6 +70,10 @@ public class NodeData {
         this.totalCost = total;
     }
 
+    public int getTotalCost() {
+        return totalCost;
+    }
+
     //LinkList toString returns id of Node
     @Override
     public String toString(){

@@ -88,7 +88,6 @@ public class AgentScreenController extends SceneController {
         //Finished Orders
         createCheckBox(PizzaLists.getList("finishedList"), AgentFinishedOrdersVB);
     }
-
     public void finishedListPickedUp(){
         //Call upon finishedOrder [Confirmed Picked-Up] button
         //When a finished order is selected and Picked-Up, order completed, remove it from finished list.

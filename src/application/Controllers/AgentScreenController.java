@@ -59,7 +59,7 @@ public class AgentScreenController extends SceneController {
                 if (curr.getId() == IdLists.getIdLists("AgentnewList").get(j)[0]) ;
                 {
                     curr.setStatus(Status.REJECT);
-                    PizzaLists.getList("readyList").add(curr);
+                    PizzaLists.getList("rejectList").add(curr);
                     //Remove checked boxes from the pane
                     int[] cbId = new int[1];
                     cbId[0] = (IdLists.getIdLists("AgentnewList").get(j)[1]);

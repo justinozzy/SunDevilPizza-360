@@ -34,8 +34,8 @@ public class ChefScreenController extends SceneController {
     }
 
     public void ChefGetInfoUpdate(){
-        ChefReadyToCookVB.getChildren().removeAll();
-        ChefReadyForPickupVB.getChildren().removeAll();
+        ChefReadyToCookVB.getChildren().removeAll(ChefReadyToCookVB.getChildren());
+        ChefReadyForPickupVB.getChildren().removeAll(ChefReadyForPickupVB.getChildren());
         ChefCookingVB.getChildren().removeAll(ChefCookingVB.getChildren());
         ChefGetInfo();
         System.out.println("***ChefPane Update Called***");
